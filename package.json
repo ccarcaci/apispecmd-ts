@@ -1,0 +1,49 @@
+{
+  "name": "apispecmd-ts",
+  "version": "0.0.1",
+  "description": "Convert your OpenAPI 3.0 specs to markdown",
+  "homepage": "https://github.com/ccarcaci/apispecmd-ts",
+  "scripts": {
+    "build": "tsc",
+    "buildImage": "echo Do Nothing",
+    "bump:major": "npm version major",
+    "bump:minor": "npm version minor",
+    "bump:patch": "npm version patch",
+    "linter": "eslint --ext .ts --fix src/ test/",
+    "ncu": "ncu --errorLevel 2",
+    "ncuUpdate": "ncu -u && npm install",
+    "start": "node build/index.js",
+    "startDev": "nodemon --watch src src/index.ts",
+    "test": "jest --passWithNoTests --runInBand"
+  },
+  "author": "ccarcaci <winston@codeab.it> (https://github.com/ccarcaci)",
+  "repository": "github:ccarcaci/apispecmd-ts",
+  "bugs": {
+    "url": "https://github.com/ccarcaci/housell/issues"
+  },
+  "main": "src/index.ts",
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^4.3.0",
+    "@typescript-eslint/parser": "^4.3.0",
+    "@types/jest": "^26.0.14",
+    "@types/node": "^14.11.2",
+    "eslint": "^7.10.0",
+    "eslint-plugin-security": "^1.4.0",
+    "jest": "^26.4.2",
+    "husky": "^4.3.0",
+    "nodemon": "^2.0.4",
+    "npm-check-updates": "^9.0.3",
+    "ts-jest": "^26.4.1",
+    "ts-node": "^9.0.0",
+    "typescript": "^4.0.3"
+  },
+  "dependencies": {
+    "fastify": "^3.5.1"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "sh preCommitHook.sh"
+    }
+  },
+  "license": "MIT"
+}
