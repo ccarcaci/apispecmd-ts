@@ -4,7 +4,7 @@
   "description": "Convert your OpenAPI 3.0 specs to markdown",
   "homepage": "https://github.com/ccarcaci/apispecmd-ts",
   "scripts": {
-    "build": "tsc",
+    "build": "tsc --project tsconfig.build.json",
     "buildImage": "echo Do Nothing",
     "bump:major": "npm version major",
     "bump:minor": "npm version minor",
