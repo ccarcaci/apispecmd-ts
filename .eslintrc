@@ -85,6 +85,10 @@
     "prefer-arrow-callback": "warn",
     "prefer-const": "error",
     "prefer-spread": "error",
-    "prefer-template": "error"
+    "prefer-template": "error",
+    "@typescript-eslint/member-delimiter-style": [ "warn", {
+      "multiline": { "delimiter": "comma" },
+      "singleline": { "delimiter": "comma" }
+    }]
   }
 }
