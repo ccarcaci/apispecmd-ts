@@ -5,40 +5,39 @@
   "homepage": "https://github.com/ccarcaci/apispecmd-ts",
   "scripts": {
     "build": "tsc --project tsconfig.build.json",
-    "buildImage": "echo Do Nothing",
     "bump:major": "npm version major",
     "bump:minor": "npm version minor",
     "bump:patch": "npm version patch",
     "linter": "eslint --ext .ts --fix src/ test/",
     "ncu": "ncu --errorLevel 2",
     "ncuUpdate": "ncu -u && npm install",
-    "start": "node build/index.js",
-    "startDev": "nodemon --watch src src/index.ts",
+    "start": "npm run build && node build/index.js openapi/examples/petstore.yaml",
     "test": "jest --passWithNoTests --runInBand"
   },
   "author": "ccarcaci <winston@codeab.it> (https://github.com/ccarcaci)",
   "repository": "github:ccarcaci/apispecmd-ts",
   "bugs": {
-    "url": "https://github.com/ccarcaci/housell/issues"
+    "url": "https://github.com/ccarcaci/apispecmd-ts/issues"
   },
   "main": "src/index.ts",
   "devDependencies": {
-    "@typescript-eslint/eslint-plugin": "^4.4.0",
-    "@typescript-eslint/parser": "^4.4.0",
+    "@typescript-eslint/eslint-plugin": "^4.4.1",
+    "@typescript-eslint/parser": "^4.4.1",
     "@types/jest": "^26.0.14",
-    "@types/node": "^14.11.5",
-    "eslint": "^7.10.0",
+    "@types/node": "^14.11.8",
+    "eslint": "^7.11.0",
     "eslint-plugin-security": "^1.4.0",
-    "jest": "^26.5.0",
+    "jest": "^26.5.3",
     "husky": "^4.3.0",
-    "nodemon": "^2.0.4",
     "npm-check-updates": "^9.0.4",
     "ts-jest": "^26.4.1",
     "ts-node": "^9.0.0",
     "typescript": "^4.0.3"
   },
   "dependencies": {
-    "fastify": "^3.5.1"
+    "@apidevtools/swagger-parser": "^10.0.2",
+    "openapi-types": "^7.0.1",
+    "yaml": "^1.10.0"
   },
   "husky": {
     "hooks": {
