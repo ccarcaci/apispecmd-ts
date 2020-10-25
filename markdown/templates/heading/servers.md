@@ -1,3 +1,3 @@
 ## Servers
 
-{{extensions.serversPart}}
+{{serversPart}}
