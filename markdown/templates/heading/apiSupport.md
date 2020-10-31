@@ -1,1 +1,0 @@
-API Support: [{{info.contact.email}}]({{info.contact.email}}) | 

@@ -1,13 +1,15 @@
 import { OpenAPIV3 } from 'openapi-types'
-import { markdownReplacer } from 'src/util/markdownReplacer'
+import { templateReplacer } from 'src/util/markdownReplacer'
 import { ReplacerKeyValueType } from 'src/util/replacer'
+
+const descriptionTemplate = '{{info.description}}'
 
 const description = (spec: OpenAPIV3.InfoObject): string => {
   const replacements: ReplacerKeyValueType = {
     key: 'info.description',
     value: spec.description ?? '',
   }
-  return markdownReplacer('markdown/templates/heading/description.md', replacements)
+  return templateReplacer(descriptionTemplate, replacements)
 }
 
 export { description }

@@ -1,8 +1,12 @@
 import { OpenAPIV3 } from 'openapi-types'
-import { markdownReplacer } from 'src/util/markdownReplacer'
+import { templateReplacer } from 'src/util/markdownReplacer'
 import { ReplacerKeyValueType } from 'src/util/replacer'
 
 import { server } from './server'
+
+const serverMarkdownTemplate = `## Servers
+
+{{serversPart}}`
 
 const servers = (spec: OpenAPIV3.ServerObject[] | undefined): string => {
   if(!spec) { return '' }
@@ -12,7 +16,7 @@ const servers = (spec: OpenAPIV3.ServerObject[] | undefined): string => {
     value: spec.map((serverPart: OpenAPIV3.ServerObject) => server(serverPart)).join('\n\n'),
   }
 
-  return markdownReplacer('markdown/templates/heading/servers.md', replacer)
+  return templateReplacer(serverMarkdownTemplate, replacer)
 }
 
 export { servers }

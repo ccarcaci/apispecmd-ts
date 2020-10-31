@@ -4,8 +4,8 @@ type ReplacerKeyValueType = {
 }
 
 const replacer = (sourceText: string, keyValues?: ReplacerKeyValueType | ReplacerKeyValueType[]): string => {
-  let transformedSourceText = sourceText.split(/{{\s+/).join('{{')
-  transformedSourceText = transformedSourceText.split(/\s+}}/).join('}}')
+  let transformedSourceText = sourceText.split(/{{ +/).join('{{')
+  transformedSourceText = transformedSourceText.split(/ +}}/).join('}}')
   transformedSourceText = transformedSourceText.split('{{}}').join('')
 
   if(!keyValues) { return transformedSourceText }
@@ -14,7 +14,12 @@ const replacer = (sourceText: string, keyValues?: ReplacerKeyValueType | Replace
     return keyValues.reduce((accumulator, keyValue) => replacer(accumulator, keyValue), transformedSourceText)
   }
 
-  return transformedSourceText.split(`{{${keyValues?.key}}}`).join(keyValues?.value)
+  return transformedSourceText
+    .split(`{{${keyValues?.key}}}`)
+    .join(keyValues?.value)
+    .replace(/\[\]/g, '')
+    .replace(/\(\)/g, '')
+    .replace(/  +/g, ' ')
 }
 
 export { replacer, ReplacerKeyValueType }

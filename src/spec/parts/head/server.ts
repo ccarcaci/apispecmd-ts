@@ -1,6 +1,8 @@
 import { OpenAPIV3 } from 'openapi-types'
-import { markdownReplacer } from 'src/util/markdownReplacer'
+import { templateReplacer } from 'src/util/markdownReplacer'
 import { ReplacerKeyValueType } from 'src/util/replacer'
+
+const serverTemplate = '- {{description}}[{{url}}]({{url}})'
 
 const server = (spec: OpenAPIV3.ServerObject): string => {
   const replacer: ReplacerKeyValueType[] = [
@@ -14,7 +16,7 @@ const server = (spec: OpenAPIV3.ServerObject): string => {
     },
   ]
 
-  return markdownReplacer('markdown/templates/heading/server.md', replacer)
+  return templateReplacer(serverTemplate, replacer)
 
 }
 
