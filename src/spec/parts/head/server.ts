@@ -5,16 +5,10 @@ import { ReplacerKeyValueType } from 'src/util/replacer'
 const serverTemplate = '- {{description}}[{{url}}]({{url}})'
 
 const server = (spec: OpenAPIV3.ServerObject): string => {
-  const replacer: ReplacerKeyValueType[] = [
-    {
-      key: 'description',
-      value: spec.description ? `${spec.description} | ` : '',
-    },
-    {
-      key: 'url',
-      value: spec.url,
-    },
-  ]
+  const replacer: ReplacerKeyValueType = {
+    description: spec.description ? `${spec.description} | ` : '',
+    url: spec.url,
+  }
 
   return templateReplacer(serverTemplate, replacer)
 

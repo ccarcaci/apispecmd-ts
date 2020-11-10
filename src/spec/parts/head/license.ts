@@ -7,10 +7,10 @@ const licenseUrlTemplate = 'License: [{{licenseName}}]({{licenseUrl}})'
 const license = (license?: OpenAPIV3.LicenseObject): string => {
   if(!license) { return '' }
 
-  const replacer = { key: 'licenseName', value: license.name }
+  const replacer = { licenseName: license.name }
 
   if(license.url) {
-    const urlReplacer = [ replacer, { key: 'licenseUrl', value: license.url } ]
+    const urlReplacer = { ...replacer, licenseUrl: license.url }
 
     return templateReplacer(licenseUrlTemplate, urlReplacer)
   }

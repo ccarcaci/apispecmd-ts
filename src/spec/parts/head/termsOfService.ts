@@ -5,7 +5,7 @@ const termsOfServiceTemplate = '[Terms of Service]({{termsOfServiceUrl}})'
 const termsOfService = (termsOfService?: string): string => {
   if(!termsOfService) { return '' }
 
-  const replacer = { key: 'termsOfServiceUrl', value: termsOfService }
+  const replacer = { termsOfServiceUrl: termsOfService }
 
   return templateReplacer(termsOfServiceTemplate, replacer)
 }

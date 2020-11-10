@@ -8,20 +8,11 @@ const apiSupportTemplate = 'API Support: {{contactName}} [{{contactEmail}}]({{co
 const apiSupport = (contact?: OpenAPIV3.ContactObject): string => {
   if(!contact || Object.entries(contact).length <= 0) { return '' }
 
-  const replacer: ReplacerKeyValueType[] = [
-    {
-      key: 'contactName',
-      value: contact.name ?? '',
-    },
-    {
-      key: 'contactEmail',
-      value: contact.email ?? '',
-    },
-    {
-      key: 'contactUrl',
-      value: contact.url ?? '',
-    },
-  ]
+  const replacer: ReplacerKeyValueType = {
+    contactName: contact.name ?? '',
+    contactEmail: contact.email ?? '',
+    contactUrl: contact.url ?? '',
+  }
 
   return templateReplacer(apiSupportTemplate, replacer)
 }

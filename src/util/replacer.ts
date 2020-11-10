@@ -1,22 +1,29 @@
 type ReplacerKeyValueType = {
-  key: string,
-  value: string,
+  [key: string]: string,
 }
 
-const replacer = (sourceText: string, keyValues?: ReplacerKeyValueType | ReplacerKeyValueType[]): string => {
+const replacer = (sourceText: string, keyValues?: ReplacerKeyValueType): string => {
   let transformedSourceText = sourceText.split(/{{ +/).join('{{')
   transformedSourceText = transformedSourceText.split(/ +}}/).join('}}')
   transformedSourceText = transformedSourceText.split('{{}}').join('')
 
-  if(!keyValues) { return transformedSourceText }
+  if(!keyValues ) { return transformedSourceText }
 
-  if(Array.isArray(keyValues)) {
-    return keyValues.reduce((accumulator, keyValue) => replacer(accumulator, keyValue), transformedSourceText)
+  const keys = Object.keys(keyValues)
+
+  if(keys.length <= 0) { return transformedSourceText }
+  if(keys.length > 1) {
+    // eslint-disable-next-line security/detect-object-injection
+    return keys.reduce((accumulator, key) => replacer(accumulator, { [key]: keyValues[key] }), transformedSourceText)
   }
 
+  const key = keys[0]
+  // eslint-disable-next-line security/detect-object-injection
+  const value = keyValues[key]
+
   return transformedSourceText
-    .split(`{{${keyValues?.key}}}`)
-    .join(keyValues?.value)
+    .split(`{{${key}}}`)
+    .join(value)
     .replace(/\[\]/g, '')
     .replace(/\(\)/g, '')
     .replace(/  +/g, ' ')
