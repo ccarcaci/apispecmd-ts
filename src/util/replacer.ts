@@ -27,6 +27,7 @@ const replacer = (sourceText: string, keyValues?: ReplacerKeyValueType): string 
     .replace(/\[\]/g, '')
     .replace(/\(\)/g, '')
     .replace(/  +/g, ' ')
+    .replace(/\n+$/g, '')
 }
 
 export { replacer, ReplacerKeyValueType }
