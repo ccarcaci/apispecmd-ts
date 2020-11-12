@@ -2,9 +2,47 @@ import { OpenAPIV3 } from 'openapi-types'
 
 import { OperationType } from './types/OperationType'
 
+const creaateOperationType = (
+  verb: string,
+  path: string,
+  summary?: string,
+  description?: string,
+  parameters?: (OpenAPIV3.ReferenceObject | OpenAPIV3.ParameterObject)[],
+  operationObject?: OpenAPIV3.OperationObject): OperationType | undefined => {
+  if(!operationObject) { return }
+
+  return {
+    verb,
+    path,
+    summary,
+    description,
+    parameters,
+    operationObject,
+  }
+}
+
 const operationsMapper = (spec: OpenAPIV3.Document): OperationType[] => {
-  spec
-  return []
+  const paths = Object.keys(spec.paths)
+
+  const operations = paths.flatMap((path) => {
+    // eslint-disable-next-line security/detect-object-injection
+    const pathItem = spec.paths[path]
+
+    return [
+      creaateOperationType('GET', path, pathItem.summary, pathItem.description, pathItem.parameters, pathItem.get),
+      creaateOperationType('PUT', path, pathItem.summary, pathItem.description, pathItem.parameters, pathItem.put),
+      creaateOperationType('POST', path, pathItem.summary, pathItem.description, pathItem.parameters, pathItem.post),
+      // eslint-disable-next-line max-len
+      creaateOperationType('DELETE', path, pathItem.summary, pathItem.description, pathItem.parameters, pathItem.delete),
+      // eslint-disable-next-line max-len
+      creaateOperationType('OPTIONS', path, pathItem.summary, pathItem.description, pathItem.parameters, pathItem.options),
+      creaateOperationType('HEAD', path, pathItem.summary, pathItem.description, pathItem.parameters, pathItem.head),
+      creaateOperationType('PATCH', path, pathItem.summary, pathItem.description, pathItem.parameters, pathItem.patch),
+      creaateOperationType('TRACE', path, pathItem.summary, pathItem.description, pathItem.parameters, pathItem.trace),
+    ].filter((removeUndefinedOnes) => removeUndefinedOnes)
+  }) as OperationType[]
+
+  return operations
 }
 
 export { operationsMapper }
