@@ -2,12 +2,13 @@ import { OpenAPIV3 } from 'openapi-types'
 
 import { OperationType } from './types/OperationType'
 
-const creaateOperationType = (
+const createOperationType = (
   verb: string,
   path: string,
   summary?: string,
   description?: string,
   parameters?: (OpenAPIV3.ReferenceObject | OpenAPIV3.ParameterObject)[],
+  // eslint-disable-next-line max-params
   operationObject?: OpenAPIV3.OperationObject): OperationType | undefined => {
   if(!operationObject) { return }
 
@@ -29,16 +30,16 @@ const operationsMapper = (spec: OpenAPIV3.Document): OperationType[] => {
     const pathItem = spec.paths[path]
 
     return [
-      creaateOperationType('GET', path, pathItem.summary, pathItem.description, pathItem.parameters, pathItem.get),
-      creaateOperationType('PUT', path, pathItem.summary, pathItem.description, pathItem.parameters, pathItem.put),
-      creaateOperationType('POST', path, pathItem.summary, pathItem.description, pathItem.parameters, pathItem.post),
+      createOperationType('GET', path, pathItem.summary, pathItem.description, pathItem.parameters, pathItem.get),
+      createOperationType('PUT', path, pathItem.summary, pathItem.description, pathItem.parameters, pathItem.put),
+      createOperationType('POST', path, pathItem.summary, pathItem.description, pathItem.parameters, pathItem.post),
       // eslint-disable-next-line max-len
-      creaateOperationType('DELETE', path, pathItem.summary, pathItem.description, pathItem.parameters, pathItem.delete),
+      createOperationType('DELETE', path, pathItem.summary, pathItem.description, pathItem.parameters, pathItem.delete),
       // eslint-disable-next-line max-len
-      creaateOperationType('OPTIONS', path, pathItem.summary, pathItem.description, pathItem.parameters, pathItem.options),
-      creaateOperationType('HEAD', path, pathItem.summary, pathItem.description, pathItem.parameters, pathItem.head),
-      creaateOperationType('PATCH', path, pathItem.summary, pathItem.description, pathItem.parameters, pathItem.patch),
-      creaateOperationType('TRACE', path, pathItem.summary, pathItem.description, pathItem.parameters, pathItem.trace),
+      createOperationType('OPTIONS', path, pathItem.summary, pathItem.description, pathItem.parameters, pathItem.options),
+      createOperationType('HEAD', path, pathItem.summary, pathItem.description, pathItem.parameters, pathItem.head),
+      createOperationType('PATCH', path, pathItem.summary, pathItem.description, pathItem.parameters, pathItem.patch),
+      createOperationType('TRACE', path, pathItem.summary, pathItem.description, pathItem.parameters, pathItem.trace),
     ].filter((removeUndefinedOnes) => removeUndefinedOnes)
   }) as OperationType[]
 

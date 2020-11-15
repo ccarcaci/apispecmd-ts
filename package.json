@@ -9,8 +9,10 @@
     "bump:minor": "npm version minor",
     "bump:patch": "npm version patch",
     "linter": "eslint --ext .ts --fix src/ test/",
-    "ncu": "ncu --errorLevel 2",
-    "ncuUpdate": "ncu -u && npm install",
+    "ncu": "ncu --target minor --errorLevel 2",
+    "ncuUpdateMinor": "ncu --upgrade --target minor && npm install",
+    "ncuVerifyUpdateMinor": "ncu --target minor --errorLevel 2",
+    "ncuVerifyUpdateMajor": "ncu --target latest",
     "start": "npm run build && node build/index.js openapi/examples/petstore.yaml",
     "test": "jest --passWithNoTests --runInBand"
   },
