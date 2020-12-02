@@ -1,4 +1,4 @@
-import { renderSecurityScheme } from "src/spec/parts/paths/renderSecurityScheme"
+import { renderSecurityScheme } from 'src/spec/parts/paths/renderSecurityScheme'
 import { KeySecuritySchemeType } from 'src/spec/parts/paths/types/KeySecuritySchemeType'
 
 describe('Render Different Types of Security Schemes', () => {
