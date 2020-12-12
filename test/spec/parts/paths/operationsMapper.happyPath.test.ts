@@ -39,6 +39,7 @@ describe('Given an OpenAPI Spec Create Operations Array', () => {
         summary: 'Pet API',
         description: 'Manage your pet',
         parameters: [{ name: 'param', in: 'path' }],
+        security: [],
         operationObject: { summary: 'Get pet' },
       } as OperationType,
       {
@@ -47,6 +48,7 @@ describe('Given an OpenAPI Spec Create Operations Array', () => {
         summary: 'Pet API',
         description: 'Manage your pet',
         parameters: [{ name: 'param', in: 'path' }],
+        security: [],
         operationObject: { summary: 'Put pet' },
       } as OperationType,
       {
@@ -55,6 +57,7 @@ describe('Given an OpenAPI Spec Create Operations Array', () => {
         summary: 'Pet API',
         description: 'Manage your pet',
         parameters: [{ name: 'param', in: 'path' }],
+        security: [],
         operationObject: { summary: 'Post pet' },
       } as OperationType,
       {
@@ -63,6 +66,7 @@ describe('Given an OpenAPI Spec Create Operations Array', () => {
         summary: 'Pet API',
         description: 'Manage your pet',
         parameters: [{ name: 'param', in: 'path' }],
+        security: [],
         operationObject: { summary: 'Delete pet :(' },
       } as OperationType,
       {
@@ -71,6 +75,7 @@ describe('Given an OpenAPI Spec Create Operations Array', () => {
         summary: 'Pet API',
         description: 'Manage your pet',
         parameters: [{ name: 'param', in: 'path' }],
+        security: [],
         operationObject: { summary: 'Options pet' },
       } as OperationType,
       {
@@ -79,6 +84,7 @@ describe('Given an OpenAPI Spec Create Operations Array', () => {
         summary: 'Pet API',
         description: 'Manage your pet',
         parameters: [{ name: 'param', in: 'path' }],
+        security: [],
         operationObject: { summary: 'Head pet' },
       } as OperationType,
       {
@@ -87,6 +93,7 @@ describe('Given an OpenAPI Spec Create Operations Array', () => {
         summary: 'Pet API',
         description: 'Manage your pet',
         parameters: [{ name: 'param', in: 'path' }],
+        security: [],
         operationObject: { summary: 'Patch pet' },
       } as OperationType,
       {
@@ -95,6 +102,7 @@ describe('Given an OpenAPI Spec Create Operations Array', () => {
         summary: 'Pet API',
         description: 'Manage your pet',
         parameters: [{ name: 'param', in: 'path' }],
+        security: [],
         operationObject: { summary: 'Trace pet' },
       } as OperationType,
       {
@@ -102,6 +110,7 @@ describe('Given an OpenAPI Spec Create Operations Array', () => {
         path: '/store',
         summary: 'Store API',
         description: 'Pet store',
+        security: [],
         operationObject: { summary: 'Get store' },
       } as OperationType,
       {
@@ -109,6 +118,7 @@ describe('Given an OpenAPI Spec Create Operations Array', () => {
         path: '/store',
         summary: 'Store API',
         description: 'Pet store',
+        security: [],
         operationObject: { summary: 'Put store' },
       } as OperationType,
       {
@@ -116,6 +126,7 @@ describe('Given an OpenAPI Spec Create Operations Array', () => {
         path: '/store',
         summary: 'Store API',
         description: 'Pet store',
+        security: [],
         operationObject: { summary: 'Post store' },
       } as OperationType,
     ])

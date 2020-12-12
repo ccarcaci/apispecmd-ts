@@ -1,16 +1,28 @@
 import { OpenAPIV3 } from 'openapi-types'
+import { securityMapper } from './securityMapper'
+import { KeySecuritySchemeType } from './types/KeySecuritySchemeType'
 
 import { OperationType } from './types/OperationType'
 
 const createOperationType = (
   verb: string,
   path: string,
-  summary?: string,
-  description?: string,
-  parameters?: (OpenAPIV3.ReferenceObject | OpenAPIV3.ParameterObject)[],
-  // eslint-disable-next-line max-params
-  operationObject?: OpenAPIV3.OperationObject): OperationType | undefined => {
+  security: KeySecuritySchemeType[],
+  pathItemObject: OpenAPIV3.PathItemObject): OperationType | undefined => {
+  const operationObject = verb === 'GET' && pathItemObject.get
+    || verb === 'PUT' && pathItemObject.put
+    || verb === 'POST' && pathItemObject.post
+    || verb === 'DELETE' && pathItemObject.delete
+    || verb === 'OPTIONS' && pathItemObject.options
+    || verb === 'HEAD' && pathItemObject.head
+    || verb === 'PATCH' && pathItemObject.patch
+    || verb === 'TRACE' && pathItemObject.trace
+
   if(!operationObject) { return }
+
+  const summary = pathItemObject.summary
+  const description = pathItemObject.description
+  const parameters = pathItemObject.parameters
 
   return {
     verb,
@@ -18,28 +30,26 @@ const createOperationType = (
     summary,
     description,
     parameters,
+    security,
     operationObject,
   }
 }
 
 const operationsMapper = (spec: OpenAPIV3.Document): OperationType[] => {
   const paths = Object.keys(spec.paths)
-
   const operations = paths.flatMap((path) => {
     // eslint-disable-next-line security/detect-object-injection
     const pathItem = spec.paths[path]
 
     return [
-      createOperationType('GET', path, pathItem.summary, pathItem.description, pathItem.parameters, pathItem.get),
-      createOperationType('PUT', path, pathItem.summary, pathItem.description, pathItem.parameters, pathItem.put),
-      createOperationType('POST', path, pathItem.summary, pathItem.description, pathItem.parameters, pathItem.post),
-      // eslint-disable-next-line max-len
-      createOperationType('DELETE', path, pathItem.summary, pathItem.description, pathItem.parameters, pathItem.delete),
-      // eslint-disable-next-line max-len
-      createOperationType('OPTIONS', path, pathItem.summary, pathItem.description, pathItem.parameters, pathItem.options),
-      createOperationType('HEAD', path, pathItem.summary, pathItem.description, pathItem.parameters, pathItem.head),
-      createOperationType('PATCH', path, pathItem.summary, pathItem.description, pathItem.parameters, pathItem.patch),
-      createOperationType('TRACE', path, pathItem.summary, pathItem.description, pathItem.parameters, pathItem.trace),
+      createOperationType('GET', path, securityMapper(spec, pathItem.get), pathItem),
+      createOperationType('PUT', path, securityMapper(spec, pathItem.put), pathItem),
+      createOperationType('POST', path, securityMapper(spec, pathItem.post), pathItem),
+      createOperationType('DELETE', path, securityMapper(spec, pathItem.delete), pathItem),
+      createOperationType('OPTIONS', path, securityMapper(spec, pathItem.options), pathItem),
+      createOperationType('HEAD', path, securityMapper(spec, pathItem.head), pathItem),
+      createOperationType('PATCH', path, securityMapper(spec, pathItem.patch), pathItem),
+      createOperationType('TRACE', path, securityMapper(spec, pathItem.trace), pathItem),
     ].filter((removeUndefinedOnes) => removeUndefinedOnes)
   }) as OperationType[]
 

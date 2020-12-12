@@ -1,4 +1,5 @@
 import { OpenAPIV3 } from 'openapi-types'
+import { KeySecuritySchemeType } from './KeySecuritySchemeType'
 
 type OperationType = {
   verb: string,
@@ -6,6 +7,7 @@ type OperationType = {
   summary?: string,
   description?: string,
   parameters?: (OpenAPIV3.ReferenceObject | OpenAPIV3.ParameterObject)[],
+  security: KeySecuritySchemeType[],
   operationObject: OpenAPIV3.OperationObject,
 }
 

@@ -70,7 +70,8 @@ const explodeSecuritySchemes = (
 
 const securityMapper = (
   spec: OpenAPIV3.Document,
-  operationObject: OpenAPIV3.OperationObject): KeySecuritySchemeType[] => {
+  operationObject: OpenAPIV3.OperationObject | undefined): KeySecuritySchemeType[] => {
+  if(!operationObject) { return [] }
   // No-ref!
   if(spec.components?.securitySchemes?.$ref) { return [] }
 
