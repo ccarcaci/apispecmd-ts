@@ -1,4 +1,4 @@
-import { fetchReference } from 'src/spec/parsing/fetchReference'
+import { fetchReference } from 'src/spec/parsing/refs/fetchReference'
 
 // eslint-disable-next-line max-lines-per-function
 describe('Fetch Referenced Object From $ref', () => {

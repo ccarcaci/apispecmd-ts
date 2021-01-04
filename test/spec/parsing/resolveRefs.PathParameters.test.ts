@@ -1,11 +1,11 @@
 import { OpenAPIV3 } from 'openapi-types'
 
-import { resolveRefs } from 'src/spec/parsing/resolveRefs'
+import { resolveRefs } from 'src/spec/parsing/refs/resolveRefs'
 
 // eslint-disable-next-line max-lines-per-function
 describe('Resolve Refs', () => {
   // eslint-disable-next-line max-lines-per-function
-  test('Path item object use ref', () => {
+  test('Path parameters item object uses ref', () => {
     const spec: OpenAPIV3.Document = {
       paths: {
         '/pet': {
