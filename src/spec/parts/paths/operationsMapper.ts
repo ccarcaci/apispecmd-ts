@@ -39,7 +39,10 @@ const operationsMapper = (spec: OpenAPIV3.Document): OperationType[] => {
   const paths = Object.keys(spec.paths)
   const operations = paths.flatMap((path) => {
     // eslint-disable-next-line security/detect-object-injection
-    const pathItem = spec.paths[path]
+    if(!spec.paths[path]) { return [] }
+
+    // eslint-disable-next-line security/detect-object-injection
+    const pathItem = spec.paths[path] as OpenAPIV3.PathItemObject
 
     return [
       createOperationType('GET', path, securityMapper(spec, pathItem.get), pathItem),

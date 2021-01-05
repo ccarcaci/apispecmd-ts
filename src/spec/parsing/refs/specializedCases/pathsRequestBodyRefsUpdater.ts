@@ -18,46 +18,46 @@ const pathsRequestBodyRefsUpdater = (spec: OpenAPIV3.Document): void => {
 
 // eslint-disable-next-line max-lines-per-function
 const pathItemRequestBodyRefsUpdater = (
-  pathItem: OpenAPIV3.PathItemObject,
+  pathItem: OpenAPIV3.PathItemObject | undefined,
   components: OpenAPIV3.ComponentsObject): void => {
-  if(isReference(pathItem.get?.requestBody)) {
-    pathItem.get = operationObjectRequestBodyRefsResolver(
-      (pathItem.get as OpenAPIV3.OperationObject),
+  if(isReference(pathItem?.get?.requestBody)) {
+    (pathItem as OpenAPIV3.PathItemObject).get = operationObjectRequestBodyRefsResolver(
+      ((pathItem as OpenAPIV3.PathItemObject).get as OpenAPIV3.OperationObject),
       components)
   }
-  if(isReference(pathItem.put?.requestBody)) {
-    pathItem.put = operationObjectRequestBodyRefsResolver(
-      (pathItem.put as OpenAPIV3.OperationObject),
+  if(isReference(pathItem?.put?.requestBody)) {
+    (pathItem as OpenAPIV3.PathItemObject).put = operationObjectRequestBodyRefsResolver(
+      ((pathItem as OpenAPIV3.PathItemObject).put as OpenAPIV3.OperationObject),
       components)
   }
-  if(isReference(pathItem.post?.requestBody)) {
-    pathItem.post = operationObjectRequestBodyRefsResolver(
-      (pathItem.post as OpenAPIV3.OperationObject),
+  if(isReference(pathItem?.post?.requestBody)) {
+    (pathItem as OpenAPIV3.PathItemObject).post = operationObjectRequestBodyRefsResolver(
+      ((pathItem as OpenAPIV3.PathItemObject).post as OpenAPIV3.OperationObject),
       components)
   }
-  if(isReference(pathItem.delete?.requestBody)) {
-    pathItem.delete = operationObjectRequestBodyRefsResolver(
-      (pathItem.delete as OpenAPIV3.OperationObject),
+  if(isReference(pathItem?.delete?.requestBody)) {
+    (pathItem as OpenAPIV3.PathItemObject).delete = operationObjectRequestBodyRefsResolver(
+      ((pathItem as OpenAPIV3.PathItemObject).delete as OpenAPIV3.OperationObject),
       components)
   }
-  if(isReference(pathItem.options?.requestBody)) {
-    pathItem.options = operationObjectRequestBodyRefsResolver(
-      (pathItem.options as OpenAPIV3.OperationObject),
+  if(isReference(pathItem?.options?.requestBody)) {
+    (pathItem as OpenAPIV3.PathItemObject).options = operationObjectRequestBodyRefsResolver(
+      ((pathItem as OpenAPIV3.PathItemObject).options as OpenAPIV3.OperationObject),
       components)
   }
-  if(isReference(pathItem.head?.requestBody)) {
-    pathItem.head = operationObjectRequestBodyRefsResolver(
-      (pathItem.head as OpenAPIV3.OperationObject),
+  if(isReference(pathItem?.head?.requestBody)) {
+    (pathItem as OpenAPIV3.PathItemObject).head = operationObjectRequestBodyRefsResolver(
+      ((pathItem as OpenAPIV3.PathItemObject).head as OpenAPIV3.OperationObject),
       components)
   }
-  if(isReference(pathItem.patch?.requestBody)) {
-    pathItem.patch = operationObjectRequestBodyRefsResolver(
-      (pathItem.patch as OpenAPIV3.OperationObject),
+  if(isReference(pathItem?.patch?.requestBody)) {
+    (pathItem as OpenAPIV3.PathItemObject).patch = operationObjectRequestBodyRefsResolver(
+      ((pathItem as OpenAPIV3.PathItemObject).patch as OpenAPIV3.OperationObject),
       components)
   }
-  if(isReference(pathItem.trace?.requestBody)) {
-    pathItem.trace = operationObjectRequestBodyRefsResolver(
-      (pathItem.trace as OpenAPIV3.OperationObject),
+  if(isReference(pathItem?.trace?.requestBody)) {
+    (pathItem as OpenAPIV3.PathItemObject).trace = operationObjectRequestBodyRefsResolver(
+      ((pathItem as OpenAPIV3.PathItemObject).trace as OpenAPIV3.OperationObject),
       components)
   }
 }

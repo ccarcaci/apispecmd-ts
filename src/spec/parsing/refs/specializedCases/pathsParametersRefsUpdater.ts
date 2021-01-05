@@ -9,9 +9,10 @@ const pathsParametersRefsUpdater = (spec: OpenAPIV3.Document): void => {
   const pathNames = getPathNames(spec.paths)
 
   pathNames.forEach((pathName) => {
-    if(!spec.paths[pathName].parameters) { return }
+    if(!spec.paths[pathName]?.parameters) { return }
 
-    spec.paths[pathName].parameters = spec.paths[pathName].parameters?.map((parameter) => {
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+    spec.paths[pathName]!.parameters = spec.paths[pathName]!.parameters?.map((parameter) => {
       if(!isReference(parameter)) { return parameter }
       return fetchReference(
         (parameter as OpenAPIV3.ReferenceObject).$ref,
