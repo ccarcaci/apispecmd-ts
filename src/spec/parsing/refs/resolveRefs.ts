@@ -1,12 +1,14 @@
 import { OpenAPIV3 } from 'openapi-types'
+import { pathsOperationParametersRefsUpdater } from './specializedCases/pathsOperationParametersRefsUpdater'
 
 import { pathsParametersRefsUpdater } from './specializedCases/pathsParametersRefsUpdater'
-import { pathsRequestBodyRefsUpdater } from './specializedCases/pathsRequestBodyRefsResolver'
+import { pathsRequestBodyRefsUpdater } from './specializedCases/pathsRequestBodyRefsUpdater'
 
 const resolveRefs = (spec: OpenAPIV3.Document): OpenAPIV3.Document => {
   const specCopy = spec
   pathsParametersRefsUpdater(spec)
   pathsRequestBodyRefsUpdater(spec)
+  pathsOperationParametersRefsUpdater(spec)
 
   return specCopy
 }

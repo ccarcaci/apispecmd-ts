@@ -69,4 +69,30 @@ describe('Resolve Refs', () => {
       },
     })
   })
+
+  test('Leave untouched Operation Object', () => {
+    const spec: OpenAPIV3.Document = {
+      paths: {
+        '/pet': {
+          summary: 'Your Pet Operations',
+          post: {
+            requestBody: {
+              description: 'Your Pet Description',
+              content: {
+                'application/json': {
+                  schema: {
+                    type: 'boolean',
+                  },
+                },
+              },
+            },
+          },
+        },
+      },
+    } as unknown as OpenAPIV3.Document
+
+    const result = resolveRefs(spec)
+
+    expect(result).toEqual(spec)
+  })
 })
