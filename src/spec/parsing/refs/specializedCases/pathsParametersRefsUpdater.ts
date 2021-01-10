@@ -2,11 +2,11 @@
 import { OpenAPIV3 } from 'openapi-types'
 
 import { fetchReference } from '../fetchReference'
-import { getPathNames } from '../getPathNames'
+import { getStringKeys } from '../getStringKeys'
 import { isReference } from '../isReference'
 
 const pathsParametersRefsUpdater = (spec: OpenAPIV3.Document): void => {
-  const pathNames = getPathNames(spec.paths)
+  const pathNames = getStringKeys(spec.paths)
 
   pathNames.forEach((pathName) => {
     if(!spec.paths[pathName]?.parameters) { return }

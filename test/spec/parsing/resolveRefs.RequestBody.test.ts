@@ -95,4 +95,12 @@ describe('Resolve Refs', () => {
 
     expect(result).toEqual(spec)
   })
+
+  test('No paths', () => {
+    const spec: OpenAPIV3.Document = {} as unknown as OpenAPIV3.Document
+
+    const result = resolveRefs(spec)
+
+    expect(result).toEqual({})
+  })
 })
