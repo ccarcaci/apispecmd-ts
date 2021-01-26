@@ -19,9 +19,9 @@ describe('Resolve Refs', () => {
       },
     } as unknown as OpenAPIV3.Document
 
-    const result = resolveRefs(spec)
+    resolveRefs(spec)
 
-    expect(result).toEqual({
+    expect(spec).toEqual({
       components: {
         headers: {
           MyHeader: {

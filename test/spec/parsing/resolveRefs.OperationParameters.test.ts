@@ -27,9 +27,9 @@ describe('Resolve Refs', () => {
       },
     } as unknown as OpenAPIV3.Document
 
-    const result = resolveRefs(spec)
+    resolveRefs(spec)
 
-    expect(result).toEqual({
+    expect(spec).toEqual({
       paths: {
         '/pet': {
           summary: 'Your Pet Operations',
@@ -72,9 +72,9 @@ describe('Resolve Refs', () => {
       },
     } as unknown as OpenAPIV3.Document
 
-    const result = resolveRefs(spec)
+    resolveRefs(spec)
 
-    expect(result).toEqual({
+    expect(spec).toEqual({
       paths: {
         '/pet': {
           summary: 'Your Pet Operations',
@@ -94,8 +94,8 @@ describe('Resolve Refs', () => {
   test('No paths', () => {
     const spec: OpenAPIV3.Document = {} as unknown as OpenAPIV3.Document
 
-    const result = resolveRefs(spec)
+    resolveRefs(spec)
 
-    expect(result).toEqual({})
+    expect(spec).toEqual({})
   })
 })
