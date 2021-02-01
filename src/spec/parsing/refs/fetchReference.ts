@@ -4,15 +4,15 @@ import { RefUnresolvedError } from './errors/RefUnresolvedError'
 import { isReference } from './isReference'
 
 export type ReusableObjectType = OpenAPIV3.ReferenceObject
-  | OpenAPIV3.SchemaObject
-  | OpenAPIV3.ResponsesObject
-  | OpenAPIV3.ParameterObject
-  | OpenAPIV3.ExampleObject
-  | OpenAPIV3.RequestBodyObject
-  | OpenAPIV3.HeaderObject
-  | OpenAPIV3.SecuritySchemeObject
-  | OpenAPIV3.LinkObject
-  | OpenAPIV3.CallbackObject
+| OpenAPIV3.SchemaObject
+| OpenAPIV3.ResponsesObject
+| OpenAPIV3.ParameterObject
+| OpenAPIV3.ExampleObject
+| OpenAPIV3.RequestBodyObject
+| OpenAPIV3.HeaderObject
+| OpenAPIV3.SecuritySchemeObject
+| OpenAPIV3.LinkObject
+| OpenAPIV3.CallbackObject
 
 type ComponentObjecType = {
   [key: string]: ReusableObjectType,
