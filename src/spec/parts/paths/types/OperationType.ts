@@ -6,7 +6,7 @@ type OperationType = {
   path: string,
   summary?: string,
   description?: string,
-  parameters?: (OpenAPIV3.ReferenceObject | OpenAPIV3.ParameterObject)[],
+  parameters?: OpenAPIV3.ParameterObject[],
   security: KeySecuritySchemeType[],
   operationObject: OpenAPIV3.OperationObject,
 }

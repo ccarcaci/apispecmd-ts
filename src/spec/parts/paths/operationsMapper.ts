@@ -22,7 +22,7 @@ const createOperationType = (
 
   const summary = pathItemObject.summary
   const description = pathItemObject.description
-  const parameters = pathItemObject.parameters
+  const parameters = pathItemObject.parameters as OpenAPIV3.ParameterObject[]
 
   return {
     verb,

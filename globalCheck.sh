@@ -14,3 +14,5 @@ npm test
 
 printf '\nBuilding...\n\n'
 npm run build
+
+printf '\nDone\n\n'
