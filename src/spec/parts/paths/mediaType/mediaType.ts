@@ -1,36 +1,33 @@
 import { OpenAPIV3 } from 'openapi-types'
 
-import { property } from './property'
+import { properties } from './properties'
 import { templateReplacer } from 'src/util/markdownReplacer'
+import { EmptySchemaError } from './errors/EmptySchemaError'
 
 const mediaTypeTemplate = `## {{mediaTypeTitle}} ({{mediaTypeName}})
 {{mediaTypeDescription}}
 
-|Name|Required|Type|Format|Default|Minimum|Exclusive Minimum|Maximum|Exclusive Maximum|Min Length|Max Length|Pattern|Nullable|Read Only|Write Only|Deprecated|
-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|
-{{mediaTypeTable}}
+{{propertiesTables}}
 
-### Enums
-{{mediaTypeEnums}}
-
-## {{mediaTypeTitle}} Examples
-
-\`\`\`
-{{mediaTypeExamples}}
-\`\`\`
+{{mediaTypeExample}}
 `
 
 const mediaType = (mediaTypeName: string, mediaTypeObject: OpenAPIV3.MediaTypeObject): string => {
-  const schemaObject: OpenAPIV3.NonArraySchemaObject = mediaTypeObject.schema as OpenAPIV3.NonArraySchemaObject
-  const schemaObjectProperties = schemaObject.properties as { [name: string]: OpenAPIV3.SchemaObject }
-  const mediaTypeTable = generateMediaTypeTable(
-    schemaObject.required ?? [],
-    schemaObjectProperties ?? {})
+  const baseMediaType: OpenAPIV3.NonArraySchemaObject = mediaTypeObject.schema as OpenAPIV3.NonArraySchemaObject
+
+  if(!baseMediaType) {
+    throw new EmptySchemaError()
+  }
+
+  const propertiesCast = baseMediaType.properties as { [name: string]: OpenAPIV3.SchemaObject }
+  const propertiesTables = properties(propertiesCast, baseMediaType.required).join('\n\n')
+  const mediaTypeExample = generateMediaTypeExample(mediaTypeObject.example)
   const templateReplacements = {
     mediaTypeName,
-    mediaTypeTitle: schemaObject.title ?? '',
-    mediaTypeDescription: schemaObject.description ?? '',
-    mediaTypeTable,
+    mediaTypeTitle: baseMediaType.title ?? '',
+    mediaTypeDescription: baseMediaType.description ?? '',
+    propertiesTables,
+    mediaTypeExample,
   }
 
   return templateReplacer(mediaTypeTemplate, templateReplacements)
@@ -38,20 +35,19 @@ const mediaType = (mediaTypeName: string, mediaTypeObject: OpenAPIV3.MediaTypeOb
 
 // # ## ### ##### ########
 
-const generateMediaTypeTable = (
-  requiredProperties: string[],
-  properties: { [name: string]: OpenAPIV3.SchemaObject }): string => {
-  const isRequired = generateIsRequiredFunction(requiredProperties)
-  return Object.keys(properties).map((propertyName) => property(
-    // eslint-disable-next-line security/detect-object-injection
-    properties[propertyName],
-    propertyName,
-    isRequired(propertyName)))
-    .join('\n')
-}
+const mediaTypeExampleTemplate = `### {{mediaTypeTitle}} Example
 
-const generateIsRequiredFunction = (requiredProperties: string[]) => (property: string): boolean =>
-  requiredProperties.includes(property)
+\`\`\`
+{{mediaTypeExample}}
+\`\`\``
+
+const generateMediaTypeExample = (mediaTypeTitle: string, mediaTypeExample?: {[key: string]: string}): string => {
+  if(!mediaTypeExample) { return '' }
+  return templateReplacer(mediaTypeExampleTemplate, {
+    mediaTypeTitle,
+    mediaTypeExample: JSON.stringify(mediaTypeExample),
+  })
+}
 
 // # ## ### ##### ########
 

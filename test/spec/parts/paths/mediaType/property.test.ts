@@ -1,6 +1,6 @@
 import { OpenAPIV3 } from 'openapi-types'
 
-import { property } from 'src/spec/parts/paths/mediaType/property'
+import { properties } from 'src/spec/parts/paths/mediaType/properties'
 
 // eslint-disable-next-line max-lines-per-function
 describe('Render Schema Property', () => {
@@ -23,7 +23,7 @@ describe('Render Schema Property', () => {
       deprecated: true,
     }
 
-    const propertyContent = property(propertyObject, 'paramA', true)
+    const propertyContent = properties(propertyObject, 'paramA', true)
 
     // eslint-disable-next-line max-len
     // |name|required|type|format|default|minimum|exclusiveMinimum|maximum|exclusiveMaximum|minLength|maxLength|pattern|nullable|readOnly|writeOnly|deprecated|
@@ -32,7 +32,7 @@ describe('Render Schema Property', () => {
 
   test('Minimum set of information', () => {
     const propertyObject = {}
-    const propertyContent = property(propertyObject, 'paramA')
+    const propertyContent = properties(propertyObject, 'paramA')
 
     // eslint-disable-next-line max-len
     // |name|required|type|format|default|minimum|exclusiveMinimum|maximum|exclusiveMaximum|minLength|maxLength|pattern|nullable|readOnly|writeOnly|deprecated|
