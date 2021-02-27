@@ -3,6 +3,7 @@ import { OpenAPIV3 } from 'openapi-types'
 import { mediaType } from 'src/spec/parts/paths/mediaType/mediaType'
 import { mocked } from 'ts-jest/utils'
 import { properties } from 'src/spec/parts/paths/mediaType/properties'
+import { EmptySchemaError } from 'src/spec/parts/paths/mediaType/errors/EmptySchemaError'
 
 jest.mock('src/spec/parts/paths/mediaType/properties')
 
@@ -46,10 +47,9 @@ The table
 
 \`\`\`
 {
-  foo: 'bar',
+ "foo": "bar"
 }
-\`\`\`
-`)
+\`\`\``)
   })
 
   test('Minimum set of information', () => {
@@ -69,5 +69,15 @@ The table
 The table`)
   })
 
-  test('Media Type Schema is empty')
+  test('Media Type Schema is empty', () => {
+    const mediaTypeObject: OpenAPIV3.MediaTypeObject = {
+      schema: {},
+    }
+
+    try {
+      mediaType('application/json', mediaTypeObject)
+    } catch(error) {
+      expect(error).toBeInstanceOf(EmptySchemaError)
+    }
+  })
 })

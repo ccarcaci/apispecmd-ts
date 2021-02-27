@@ -21,7 +21,7 @@ const mediaType = (mediaTypeName: string, mediaTypeObject: OpenAPIV3.MediaTypeOb
 
   const propertiesCast = baseMediaType.properties as { [name: string]: OpenAPIV3.SchemaObject }
   const propertiesTables = properties(propertiesCast, baseMediaType.required).join('\n\n')
-  const mediaTypeExample = generateMediaTypeExample(mediaTypeObject.example)
+  const mediaTypeExample = generateMediaTypeExample(baseMediaType.title, mediaTypeObject.example)
   const templateReplacements = {
     mediaTypeName,
     mediaTypeTitle: baseMediaType.title ?? '',
@@ -41,11 +41,11 @@ const mediaTypeExampleTemplate = `### {{mediaTypeTitle}} Example
 {{mediaTypeExample}}
 \`\`\``
 
-const generateMediaTypeExample = (mediaTypeTitle: string, mediaTypeExample?: {[key: string]: string}): string => {
+const generateMediaTypeExample = (mediaTypeTitle?: string, mediaTypeExample?: {[key: string]: string}): string => {
   if(!mediaTypeExample) { return '' }
   return templateReplacer(mediaTypeExampleTemplate, {
-    mediaTypeTitle,
-    mediaTypeExample: JSON.stringify(mediaTypeExample),
+    mediaTypeTitle: mediaTypeTitle ?? '',
+    mediaTypeExample: JSON.stringify(mediaTypeExample, null, 2),
   })
 }
 
