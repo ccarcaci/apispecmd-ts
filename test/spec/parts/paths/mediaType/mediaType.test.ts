@@ -2,7 +2,7 @@ import { OpenAPIV3 } from 'openapi-types'
 
 import { mediaType } from 'src/spec/parts/paths/mediaType/mediaType'
 import { mocked } from 'ts-jest/utils'
-import { properties } from 'src/spec/parts/paths/mediaType/properties'
+import { properties } from 'src/spec/parts/paths/mediaType/schema/schema'
 import { EmptySchemaError } from 'src/spec/parts/paths/mediaType/errors/EmptySchemaError'
 
 jest.mock('src/spec/parts/paths/mediaType/properties')
@@ -80,4 +80,6 @@ The table`)
       expect(error).toBeInstanceOf(EmptySchemaError)
     }
   })
+
+  test('allOf/oneOf/anyOf')
 })

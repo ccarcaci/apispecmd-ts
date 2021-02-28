@@ -1,6 +1,6 @@
 import { OpenAPIV3 } from 'openapi-types'
 
-import { properties } from './properties'
+import { schema } from './schema/schema'
 import { templateReplacer } from 'src/util/markdownReplacer'
 import { EmptySchemaError } from './errors/EmptySchemaError'
 

@@ -1,5 +1,5 @@
 type ReplacerKeyValueType = {
-  [key: string]: string,
+  [key: string]: string | number | boolean | null | undefined,
 }
 
 const replacer = (sourceText: string, keyValues?: ReplacerKeyValueType): string => {
@@ -19,7 +19,7 @@ const replacer = (sourceText: string, keyValues?: ReplacerKeyValueType): string 
 
   const key = keys[0]
   // eslint-disable-next-line security/detect-object-injection
-  const value = keyValues[key]
+  const value = stringifyValue(keyValues[key])
 
   return transformedSourceText
     .split(`{{${key}}}`)
@@ -31,5 +31,14 @@ const replacer = (sourceText: string, keyValues?: ReplacerKeyValueType): string 
     .replace(/\n\n\n+/g, '\n\n')
     .replace(/\n+$/g, '')
 }
+
+// # ## ### ##### ########
+
+const stringifyValue = (value: string | number | boolean | null | undefined): string => {
+  if(value === null || value === undefined) { return '' }
+  return `${value}`
+}
+
+// # ## ### ##### ########
 
 export { replacer, ReplacerKeyValueType }
