@@ -177,7 +177,6 @@ describe('Render Schema Property', () => {
         },
       },
     }
-    debugger
     const schemaContent = schema('Properties', schemaObj)
 
     expect(schemaContent).toEqual([
@@ -199,6 +198,4 @@ describe('Render Schema Property', () => {
 |paramD|false|integer|||||||||||||||`,
     ])
   })
-
-  test('allOf/oneOf/anyOf')
 })

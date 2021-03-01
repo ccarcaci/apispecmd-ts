@@ -5,7 +5,7 @@ import { mocked } from 'ts-jest/utils'
 import { schema } from 'src/spec/parts/paths/mediaType/schema/schema'
 import { EmptySchemaError } from 'src/spec/parts/paths/mediaType/errors/EmptySchemaError'
 
-jest.mock('src/spec/parts/paths/mediaType/properties')
+jest.mock('src/spec/parts/paths/mediaType/schema/schema')
 
 const schemaMock = mocked(schema)
 
@@ -36,6 +36,7 @@ describe('Generate Media Type', () => {
     const mediaTypeContent = mediaType('application/json', mediaTypeObject)
 
     expect(schemaMock).toBeCalledWith(
+      'Properties',
       { paramA: {} },
       ['paramA'])
     expect(mediaTypeContent).toBe(`## Fancy params (application/json)
@@ -81,5 +82,91 @@ The table`)
     }
   })
 
-  test('allOf/oneOf/anyOf')
+  test('Media Type Schema contains allOf', () => {
+    schemaMock.mockReturnValue(['The table'])
+    const mediaTypeObject: OpenAPIV3.MediaTypeObject = {
+      schema: {
+        allOf: [
+          {
+            properties: {
+              paramA: {},
+              paramB: {},
+            },
+          },
+          {
+            properties: {
+              paramC: {},
+            },
+          },
+        ],
+      },
+    }
+    const mediaTypeContent = mediaType('application/json', mediaTypeObject)
+
+    expect(mediaTypeContent).toBe(`## all of the tables below (application/json)
+
+The table
+
+The table`)
+  })
+
+  test('Media Type Schema contains oneOf', () => {
+    schemaMock.mockReturnValue(['The table'])
+    const mediaTypeObject: OpenAPIV3.MediaTypeObject = {
+      schema: {
+        oneOf: [
+          {
+            properties: {
+              paramA: {},
+              paramB: {},
+            },
+          },
+          {
+            properties: {
+              paramC: {},
+            },
+          },
+        ],
+      },
+    }
+    const mediaTypeContent = mediaType('application/json', mediaTypeObject)
+
+    expect(mediaTypeContent).toBe(`## one of the tables below (application/json)
+
+The table
+
+The table`)
+  })
+
+  test('Media Type Schema contains allOf and other attributes that are ignored', () => {
+    schemaMock.mockReturnValue(['The table'])
+    const mediaTypeObject: OpenAPIV3.MediaTypeObject = {
+      schema: {
+        type: 'object',
+        properties: {
+          paramA: {},
+        },
+        oneOf: [
+          {
+            properties: {
+              paramA: {},
+              paramB: {},
+            },
+          },
+          {
+            properties: {
+              paramC: {},
+            },
+          },
+        ],
+      },
+    }
+    const mediaTypeContent = mediaType('application/json', mediaTypeObject)
+
+    expect(mediaTypeContent).toBe(`## one of the tables below (application/json)
+
+The table
+
+The table`)
+  })
 })
