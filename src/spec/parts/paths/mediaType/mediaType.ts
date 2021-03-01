@@ -20,7 +20,7 @@ const mediaType = (mediaTypeName: string, mediaTypeObject: OpenAPIV3.MediaTypeOb
   }
 
   const propertiesCast = baseMediaType.properties as { [name: string]: OpenAPIV3.SchemaObject }
-  const propertiesTables = properties(propertiesCast, baseMediaType.required).join('\n\n')
+  const propertiesTables = schema('Properties', propertiesCast, baseMediaType.required).join('\n\n')
   const mediaTypeExample = generateMediaTypeExample(baseMediaType.title, mediaTypeObject.example)
   const templateReplacements = {
     mediaTypeName,

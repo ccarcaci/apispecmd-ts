@@ -1,3 +1,4 @@
+/* eslint-disable max-lines */
 import { OpenAPIV3 } from 'openapi-types'
 
 import { schema } from 'src/spec/parts/paths/mediaType/schema/schema'
@@ -17,6 +18,7 @@ describe('Render Schema Property', () => {
         maxLength: 10,
         minLength: 1,
         pattern: 'nnn',
+        uniqueItems: true,
         nullable: true,
         readOnly: true,
         writeOnly: true,
@@ -30,9 +32,9 @@ describe('Render Schema Property', () => {
     // |name|required|type|format|default|minimum|exclusiveMinimum|maximum|exclusiveMaximum|minLength|maxLength|pattern|nullable|readOnly|writeOnly|deprecated|
     expect(schemaContent).toEqual([`### Properties
 
-|Name|Required|Type|Format|Default|Minimum|Exclusive Minimum|Maximum|Exclusive Maximum|Min Length|Max Length|Pattern|Nullable|Read Only|Write Only|Deprecated|
-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|
-|paramA|true|integer|int64|42|0|true|4242|true|1|10|nnn|true|true|true|true|`])
+|Name|Required|Type|Format|Default|Minimum|Exclusive Minimum|Maximum|Exclusive Maximum|Min Length|Max Length|Unique Items|Pattern|Nullable|Read Only|Write Only|Deprecated|
+|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|
+|paramA|true|integer|int64|42|0|true|4242|true|1|10|true|nnn|true|true|true|true|`])
   })
 
   test('Minimum set of information', () => {
@@ -43,9 +45,9 @@ describe('Render Schema Property', () => {
     // |name|required|type|format|default|minimum|exclusiveMinimum|maximum|exclusiveMaximum|minLength|maxLength|pattern|nullable|readOnly|writeOnly|deprecated|
     expect(schemaContent).toEqual([`### Properties
 
-|Name|Required|Type|Format|Default|Minimum|Exclusive Minimum|Maximum|Exclusive Maximum|Min Length|Max Length|Pattern|Nullable|Read Only|Write Only|Deprecated|
-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|
-|paramA|false|||||||||||||||`])
+|Name|Required|Type|Format|Default|Minimum|Exclusive Minimum|Maximum|Exclusive Maximum|Min Length|Max Length|Unique Items|Pattern|Nullable|Read Only|Write Only|Deprecated|
+|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|
+|paramA|false||||||||||||||||`])
   })
 
   test('Nested properties', () => {
@@ -69,15 +71,15 @@ describe('Render Schema Property', () => {
     expect(schemaContent).toEqual([
       `### Properties
 
-|Name|Required|Type|Format|Default|Minimum|Exclusive Minimum|Maximum|Exclusive Maximum|Min Length|Max Length|Pattern|Nullable|Read Only|Write Only|Deprecated|
-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|
-|paramA|false|string||||||||||||||
-|paramB|false|object (Watch related table)||||||||||||||`,
-      `### Properties paramB
+|Name|Required|Type|Format|Default|Minimum|Exclusive Minimum|Maximum|Exclusive Maximum|Min Length|Max Length|Unique Items|Pattern|Nullable|Read Only|Write Only|Deprecated|
+|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|
+|paramA|false|string|||||||||||||||
+|paramB|false|object (See related table)|||||||||||||||`,
+      `### Properties | paramB
 
-|Name|Required|Type|Format|Default|Minimum|Exclusive Minimum|Maximum|Exclusive Maximum|Min Length|Max Length|Pattern|Nullable|Read Only|Write Only|Deprecated|
-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|
-|paramC|false|boolean||||||||||||||`,
+|Name|Required|Type|Format|Default|Minimum|Exclusive Minimum|Maximum|Exclusive Maximum|Min Length|Max Length|Unique Items|Pattern|Nullable|Read Only|Write Only|Deprecated|
+|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|
+|paramC|false|boolean|||||||||||||||`,
     ])
   })
 
@@ -93,9 +95,9 @@ describe('Render Schema Property', () => {
     expect(schemaContent).toEqual([
       `### Properties
 
-|Name|Required|Type|Format|Default|Minimum|Exclusive Minimum|Maximum|Exclusive Maximum|Min Length|Max Length|Pattern|Nullable|Read Only|Write Only|Deprecated|
-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|
-|paramA|false|number||||||||||||||
+|Name|Required|Type|Format|Default|Minimum|Exclusive Minimum|Maximum|Exclusive Maximum|Min Length|Max Length|Unique Items|Pattern|Nullable|Read Only|Write Only|Deprecated|
+|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|
+|paramA|false|number|||||||||||||||
 
 #### Enums
 
@@ -103,7 +105,100 @@ describe('Render Schema Property', () => {
     ])
   })
 
-  test('Property is an array')
+  test('Property is an array', () => {
+    const schemaObj: { [name: string]: OpenAPIV3.SchemaObject } = {
+      paramA: {
+        type: 'array',
+        items: {
+          type: 'boolean',
+        },
+        minItems: 10,
+        maxItems: 20,
+        uniqueItems: true,
+      },
+    }
+    const schemaContent = schema('Properties', schemaObj)
+
+    expect(schemaContent).toEqual([
+      `### Properties
+
+|Name|Required|Type|Format|Default|Minimum|Exclusive Minimum|Maximum|Exclusive Maximum|Min Length|Max Length|Unique Items|Pattern|Nullable|Read Only|Write Only|Deprecated|
+|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|
+|paramA|false|array of booleans|||||||10|20|true||||||`,
+    ])
+  })
+
+  test('Property is an array of objects', () => {
+    const schemaObj: { [name: string]: OpenAPIV3.SchemaObject } = {
+      paramA: {
+        type: 'array',
+        items: {
+          type: 'object',
+          required: ['paramB'],
+          properties: {
+            paramB: { type: 'string' },
+            paramC: { type: 'integer' },
+          },
+        },
+      },
+    }
+    const schemaContent = schema('Properties', schemaObj)
+
+    expect(schemaContent).toEqual([
+      `### Properties
+
+|Name|Required|Type|Format|Default|Minimum|Exclusive Minimum|Maximum|Exclusive Maximum|Min Length|Max Length|Unique Items|Pattern|Nullable|Read Only|Write Only|Deprecated|
+|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|
+|paramA|false|array of objects (See related table)|||||||||||||||`,
+      `### Properties | paramA array
+
+|Name|Required|Type|Format|Default|Minimum|Exclusive Minimum|Maximum|Exclusive Maximum|Min Length|Max Length|Unique Items|Pattern|Nullable|Read Only|Write Only|Deprecated|
+|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|
+|paramB|true|string|||||||||||||||
+|paramC|false|integer|||||||||||||||`,
+    ])
+  })
+
+  // eslint-disable-next-line max-lines-per-function
+  test('Property is an array of arrays', () => {
+    const schemaObj: { [name: string]: OpenAPIV3.SchemaObject } = {
+      paramA: {
+        type: 'array',
+        items: {
+          type: 'array',
+          items: {
+            type: 'object',
+            required: ['paramC'],
+            properties: {
+              paramC: { type: 'string' },
+              paramD: { type: 'integer' },
+            },
+          },
+        },
+      },
+    }
+    debugger
+    const schemaContent = schema('Properties', schemaObj)
+
+    expect(schemaContent).toEqual([
+      `### Properties
+
+|Name|Required|Type|Format|Default|Minimum|Exclusive Minimum|Maximum|Exclusive Maximum|Min Length|Max Length|Unique Items|Pattern|Nullable|Read Only|Write Only|Deprecated|
+|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|
+|paramA|false|array of arrays|||||||||||||||`,
+      `### Properties | paramA items
+
+|Name|Required|Type|Format|Default|Minimum|Exclusive Minimum|Maximum|Exclusive Maximum|Min Length|Max Length|Unique Items|Pattern|Nullable|Read Only|Write Only|Deprecated|
+|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|
+|paramA|false|array of objects (See related table)|||||||||||||||`,
+      `### Properties | paramA items | paramA array
+
+|Name|Required|Type|Format|Default|Minimum|Exclusive Minimum|Maximum|Exclusive Maximum|Min Length|Max Length|Unique Items|Pattern|Nullable|Read Only|Write Only|Deprecated|
+|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|
+|paramC|true|string|||||||||||||||
+|paramD|false|integer|||||||||||||||`,
+    ])
+  })
 
   test('allOf/oneOf/anyOf')
 })

@@ -32,14 +32,28 @@ const generateSubObjectsSchemas = (
   properties: {[ name: string ]: OpenAPIV3.SchemaObject }): string[] => {
   const propertiesNames = Object.keys(properties)
   return propertiesNames
-    .flatMap((propertyName) =>{
+    .flatMap((propertyName) => {
       const property = properties[propertyName]
 
       if(property.type === 'object' && property.properties) {
         return schema(
-          `${parentSectionName} ${propertyName}`,
+          `${parentSectionName} | ${propertyName}`,
           property.properties as { [name: string]: OpenAPIV3.SchemaObject },
           property.required)
+      }
+      if(property.type === 'array'
+        && (property.items as OpenAPIV3.SchemaObject).type === 'object') {
+        const propertyItems = property.items as OpenAPIV3.SchemaObject
+        return schema(
+          `${parentSectionName} | ${propertyName} array`,
+          propertyItems.properties as { [name: string]: OpenAPIV3.SchemaObject },
+          propertyItems.required)
+      }
+      if(property.type === 'array'
+        && (property.items as OpenAPIV3.SchemaObject).type === 'array') {
+        return schema(
+          `${parentSectionName} | ${propertyName} items`,
+          { [propertyName]: { ...property.items as OpenAPIV3.SchemaObject } })
       }
 
       return []

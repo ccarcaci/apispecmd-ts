@@ -2,12 +2,12 @@ import { OpenAPIV3 } from 'openapi-types'
 
 import { mediaType } from 'src/spec/parts/paths/mediaType/mediaType'
 import { mocked } from 'ts-jest/utils'
-import { properties } from 'src/spec/parts/paths/mediaType/schema/schema'
+import { schema } from 'src/spec/parts/paths/mediaType/schema/schema'
 import { EmptySchemaError } from 'src/spec/parts/paths/mediaType/errors/EmptySchemaError'
 
 jest.mock('src/spec/parts/paths/mediaType/properties')
 
-const propertiesMock = mocked(properties)
+const schemaMock = mocked(schema)
 
 // eslint-disable-next-line max-lines-per-function
 describe('Generate Media Type', () => {
@@ -15,7 +15,7 @@ describe('Generate Media Type', () => {
 
   // eslint-disable-next-line max-lines-per-function
   test('Generate media type with all possible information', () => {
-    propertiesMock.mockReturnValue(['The table'])
+    schemaMock.mockReturnValue(['The table'])
     const mediaTypeObject: OpenAPIV3.MediaTypeObject = {
       schema: {
         title: 'Fancy params',
@@ -35,7 +35,7 @@ describe('Generate Media Type', () => {
 
     const mediaTypeContent = mediaType('application/json', mediaTypeObject)
 
-    expect(propertiesMock).toBeCalledWith(
+    expect(schemaMock).toBeCalledWith(
       { paramA: {} },
       ['paramA'])
     expect(mediaTypeContent).toBe(`## Fancy params (application/json)
@@ -53,7 +53,7 @@ The table
   })
 
   test('Minimum set of information', () => {
-    propertiesMock.mockReturnValue(['The table'])
+    schemaMock.mockReturnValue(['The table'])
     const mediaTypeObject: OpenAPIV3.MediaTypeObject = {
       schema: {
         type: 'object',
