@@ -1,4 +1,4 @@
-import { templateReplacer } from 'src/util/markdownReplacer'
+import { templateReplacer } from '../../../util/markdownReplacer'
 
 const termsOfServiceTemplate = '[Terms of Service]({{termsOfServiceUrl}})'
 

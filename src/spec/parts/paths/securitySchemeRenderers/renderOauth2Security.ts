@@ -1,5 +1,5 @@
 import { OpenAPIV3 } from 'openapi-types'
-import { templateReplacer } from 'src/util/markdownReplacer'
+import { templateReplacer } from '../../../../util/markdownReplacer'
 
 type FlowSecurity = {
   authorizationUrl?: string,

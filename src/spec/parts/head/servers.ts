@@ -1,6 +1,6 @@
 import { OpenAPIV3 } from 'openapi-types'
-import { templateReplacer } from 'src/util/markdownReplacer'
-import { ReplacerKeyValueType } from 'src/util/replacer'
+import { templateReplacer } from '../../../util/markdownReplacer'
+import { ReplacerKeyValueType } from '../../../util/replacer'
 
 import { server } from './server'
 

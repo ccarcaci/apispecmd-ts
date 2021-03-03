@@ -1,5 +1,5 @@
 import { OpenAPIV3 } from 'openapi-types'
-import { templateReplacer } from 'src/util/markdownReplacer'
+import { templateReplacer } from '../../../../util/markdownReplacer'
 
 const parameters = (params: OpenAPIV3.ParameterObject[]): string => {
   if(params.length <= 0) { return '' }

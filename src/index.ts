@@ -2,6 +2,8 @@ import fs from 'fs'
 import SwaggerParser from '@apidevtools/swagger-parser'
 import { OpenAPI, OpenAPIV3 } from 'openapi-types'
 import { heading } from './spec/parts/heading'
+import { resolveRefs } from './spec/parsing/refs/resolveRefs'
+import { paths } from './spec/parts/paths'
 
 const args = process.argv.slice(2)
 const yamlPath = args[0]
@@ -23,5 +25,8 @@ SwaggerParser.validate(yamlPath, (err: Error | null, api?: OpenAPI.Document) => 
   // eslint-disable-next-line security/detect-non-literal-fs-filename
   const writeStream = fs.createWriteStream(outputMarkDownPath, { flags: 'w' })
 
-  heading(writeStream, api as OpenAPIV3.Document)
+  const specV3 = api as OpenAPIV3.Document
+  resolveRefs(specV3)
+  heading(writeStream, specV3)
+  paths(writeStream, specV3)
 })

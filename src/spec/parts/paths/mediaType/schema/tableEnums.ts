@@ -1,5 +1,5 @@
 import { OpenAPIV3 } from 'openapi-types'
-import { replacer } from 'src/util/replacer'
+import { replacer } from '../../../../../util/replacer'
 
 // eslint-disable-next-line max-len
 const tableTemplate = `|Name|Required|Type|Format|Default|Minimum|Exclusive Minimum|Maximum|Exclusive Maximum|Min Length|Max Length|Unique Items|Pattern|Nullable|Read Only|Write Only|Deprecated|

@@ -1,6 +1,6 @@
 import { OpenAPIV3 } from 'openapi-types'
 
-import { templateReplacer } from 'src/util/markdownReplacer'
+import { templateReplacer } from '../../../util/markdownReplacer'
 import { mediaType } from './mediaType/mediaType'
 
 const requestBodyTitleTemplate = `### Request Body ({{required}})

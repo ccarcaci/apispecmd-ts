@@ -1,4 +1,4 @@
-import { templateReplacer } from 'src/util/markdownReplacer'
+import { templateReplacer } from '../../../util/markdownReplacer'
 import { OperationType } from './types/OperationType'
 
 const titleTemplate = `## [{{verb}}] {{path}}

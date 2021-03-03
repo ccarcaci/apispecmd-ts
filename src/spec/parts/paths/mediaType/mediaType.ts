@@ -1,7 +1,7 @@
 import { OpenAPIV3 } from 'openapi-types'
 
 import { schema } from './schema/schema'
-import { templateReplacer } from 'src/util/markdownReplacer'
+import { templateReplacer } from '../../../../util/markdownReplacer'
 import { EmptySchemaError } from './errors/EmptySchemaError'
 
 const mediaTypeTemplate = `## {{mediaTypeTitle}} {{mediaTypeAggregation}} ({{mediaTypeName}})
