@@ -9,6 +9,7 @@ describe('Returns Operation Title Markdown', () => {
       path: '/pet',
       summary: 'Pet call summary',
       description: 'Your pets will be happy',
+      operationObject: {},
     } as unknown as OperationType
 
     expect(title(spec)).toBe(`## [POST] /pet
@@ -22,6 +23,7 @@ Your pets will be happy`)
     const spec: OperationType = {
       verb: 'POST',
       path: '/pet',
+      operationObject: {},
     } as unknown as OperationType
 
     expect(title(spec)).toBe('## [POST] /pet')
@@ -32,6 +34,7 @@ Your pets will be happy`)
       verb: 'POST',
       path: '/pet',
       description: 'Your pets will be happy',
+      operationObject: {},
     } as unknown as OperationType
 
     expect(title(spec)).toBe(`## [POST] /pet
@@ -44,10 +47,23 @@ Your pets will be happy`)
       verb: 'POST',
       path: '/pet',
       summary: 'Pet call summary',
+      operationObject: {},
     } as unknown as OperationType
 
     expect(title(spec)).toBe(`## [POST] /pet
 
 Pet call summary`)
+  })
+
+  test('OperationId', () => {
+    const spec: OperationType = {
+      verb: 'POST',
+      path: '/pet',
+      operationObject: {
+        operationId: 'RegisterPet',
+      },
+    } as unknown as OperationType
+
+    expect(title(spec)).toBe('## [POST] /pet (RegisterPet)')
   })
 })
