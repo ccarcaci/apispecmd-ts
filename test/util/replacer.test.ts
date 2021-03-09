@@ -34,14 +34,11 @@ describe('Substitute the Placeholders with Specified Variables', () => {
   test('Replace empty round brackets', () => expect(
     replacer('({{value.eenie}})', { 'value.eenie': '' })).toBe(''))
 
-  test('Trim spaces before new lines', () => {
-    debugger
-    expect(
-      replacer(`{{eenie}} {{meenie}}
+  test('Trim spaces before new lines', () => expect(
+    replacer(`{{eenie}} {{meenie}}
 some content`, {
-        eenie: 'eenie',
-        meenie: '',
-      })).toBe(`eenie
-some content`)
-  })
+      eenie: 'eenie',
+      meenie: '',
+    })).toBe(`eenie
+some content`))
 })

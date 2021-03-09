@@ -69,6 +69,7 @@ const generateEnums = (properties: {[ name: string ]: OpenAPIV3.SchemaObject }):
 
   const propertiesNames = Object.keys(properties)
   const enums = propertiesNames.map((propertyName) => {
+    // eslint-disable-next-line security/detect-object-injection
     const property = properties[propertyName]
 
     if(!property.enum) { return }
@@ -84,6 +85,7 @@ const generateEnums = (properties: {[ name: string ]: OpenAPIV3.SchemaObject }):
 const thereAreEnums = (properties: {[ name: string ]: OpenAPIV3.SchemaObject }): boolean => {
   const propertiesNames = Object.keys(properties)
   return propertiesNames
+    // eslint-disable-next-line security/detect-object-injection
     .map((propertyName) => properties[propertyName])
     .some((property) => property.enum)
 }

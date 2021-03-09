@@ -33,6 +33,7 @@ const generateSubObjectsSchemas = (
   const propertiesNames = Object.keys(properties)
   return propertiesNames
     .flatMap((propertyName) => {
+      // eslint-disable-next-line security/detect-object-injection
       const property = properties[propertyName]
 
       if(property.type === 'object' && property.properties) {
