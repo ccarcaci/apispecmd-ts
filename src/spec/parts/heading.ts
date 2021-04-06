@@ -10,10 +10,15 @@ import { termsOfService } from './head/termsOfService'
 
 const heading = (writeStream: WriteStream, spec: OpenAPIV3.Document): void => {
   writeStream.write(title(spec.info))
+  writeStream.write('\n\n')
   writeStream.write(description(spec.info))
+  writeStream.write('\n\n')
   writeStream.write(servers(spec.servers))
+  writeStream.write('\n\n')
   writeStream.write(apiSupport(spec.info.contact))
+  writeStream.write('\n\n')
   writeStream.write(license(spec.info.license))
+  writeStream.write('\n\n')
   writeStream.write(termsOfService(spec.info.termsOfService))
 }
 
