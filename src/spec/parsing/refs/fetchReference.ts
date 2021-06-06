@@ -3,6 +3,10 @@ import { OpenAPIV3 } from 'openapi-types'
 import { RefUnresolvedError } from './errors/RefUnresolvedError'
 import { isReference } from './isReference'
 
+export type CircularDependencyType = {
+  circular: string,
+}
+
 export type ReusableObjectType = OpenAPIV3.ReferenceObject
 | OpenAPIV3.SchemaObject
 | OpenAPIV3.ResponsesObject
@@ -13,25 +17,35 @@ export type ReusableObjectType = OpenAPIV3.ReferenceObject
 | OpenAPIV3.SecuritySchemeObject
 | OpenAPIV3.LinkObject
 | OpenAPIV3.CallbackObject
+| CircularDependencyType
 
 type ComponentObjecType = {
   [key: string]: ReusableObjectType,
 }
 
-const fetchReference = ($ref: string, components?: OpenAPIV3.ComponentsObject): ReusableObjectType => {
+const fetchReference = (
+  $ref: string,
+  components?: OpenAPIV3.ComponentsObject,
+  knownRefs: string[] = []): ReusableObjectType => {
   if(!$ref.startsWith('#/components/')) { throw new RefUnresolvedError(`Invalid components path: ${$ref}`) }
 
-  const reusableObject = getReusableObject($ref, components)
+  const reusableObject = getReusableObject($ref, components, knownRefs)
 
   if(isReference(reusableObject)) {
-    return fetchReference((reusableObject as OpenAPIV3.ReferenceObject).$ref, components)
+    return fetchReference((reusableObject as OpenAPIV3.ReferenceObject).$ref, components, knownRefs)
   }
 
   return reusableObject
 }
 
-const getReusableObject = ($ref: string, components?: OpenAPIV3.ComponentsObject): ReusableObjectType => {
+// # ## ### ##### ########
+
+const getReusableObject = (
+  $ref: string,
+  components?: OpenAPIV3.ComponentsObject,
+  knownRefs: string[] = []): ReusableObjectType => {
   if(!components) { throw new RefUnresolvedError(`No components specified for reference: ${$ref}`) }
+  if(alreadyKnown($ref, knownRefs)) { return { circular: $ref } as CircularDependencyType }
 
   const pathPieces = $ref.replace('#/components/', '').split('/')
 
@@ -65,5 +79,9 @@ const resolveComponentObjectType = (
 
   throw new RefUnresolvedError(`Unable to resolve component type: ${componentType}`)
 }
+
+const alreadyKnown = ($ref: string, knownRefs: string[] = []): boolean => knownRefs.includes($ref)
+
+// # ## ### ##### ########
 
 export { fetchReference }

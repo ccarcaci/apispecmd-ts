@@ -4,7 +4,8 @@ import { fetchReference } from '../fetchReference'
 
 const breadthFirstResolution = (
   specNode: unknown | unknown[],
-  components?: OpenAPIV3.ComponentsObject): unknown | unknown[] => {
+  components?: OpenAPIV3.ComponentsObject,
+  knownRefs: string[] = []): unknown | unknown[] => {
   if(!components) { return }
   if(Array.isArray(specNode)) {
     specNode = specNode.map((element) => breadthFirstResolution(element, components))
@@ -14,7 +15,9 @@ const breadthFirstResolution = (
     Object.keys(specNode)
       .forEach((specNodeKey) => {
         if(specNodeKey === '$ref') {
-          specNode = fetchReference((specNode as OpenAPIV3.ReferenceObject).$ref, components)
+          const $ref = (specNode as OpenAPIV3.ReferenceObject).$ref
+          specNode = fetchReference($ref, components)
+          knownRefs = [ ...new Set([ ...knownRefs, $ref ]) ]
           return
         }
 
