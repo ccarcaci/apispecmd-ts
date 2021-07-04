@@ -62,7 +62,7 @@ const generateSubObjectsSchemas = (
     })
 }
 
-const hasNoKeys = (properties: {[ name: string ]: OpenAPIV3.SchemaObject }): boolean => 
+const hasNoKeys = (properties: {[ name: string ]: OpenAPIV3.SchemaObject }): boolean =>
   Object.keys(properties).length <= 0
 
 // # ## ### ##### ########
