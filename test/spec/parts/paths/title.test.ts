@@ -12,7 +12,7 @@ describe('Returns Operation Title Markdown', () => {
       operationObject: {},
     } as unknown as OperationType
 
-    expect(title(spec)).toBe(`## [POST] /pet
+    expect(title(spec)).toBe(`# [POST] /pet
 
 Pet call summary
 
@@ -26,7 +26,7 @@ Your pets will be happy`)
       operationObject: {},
     } as unknown as OperationType
 
-    expect(title(spec)).toBe('## [POST] /pet')
+    expect(title(spec)).toBe('# [POST] /pet')
   })
 
   test('No summary', () => {
@@ -37,7 +37,7 @@ Your pets will be happy`)
       operationObject: {},
     } as unknown as OperationType
 
-    expect(title(spec)).toBe(`## [POST] /pet
+    expect(title(spec)).toBe(`# [POST] /pet
 
 Your pets will be happy`)
   })
@@ -50,7 +50,7 @@ Your pets will be happy`)
       operationObject: {},
     } as unknown as OperationType
 
-    expect(title(spec)).toBe(`## [POST] /pet
+    expect(title(spec)).toBe(`# [POST] /pet
 
 Pet call summary`)
   })
@@ -64,6 +64,6 @@ Pet call summary`)
       },
     } as unknown as OperationType
 
-    expect(title(spec)).toBe('## [POST] /pet (RegisterPet)')
+    expect(title(spec)).toBe('# [POST] /pet (RegisterPet)')
   })
 })

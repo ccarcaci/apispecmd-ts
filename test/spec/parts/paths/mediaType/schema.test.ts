@@ -30,11 +30,11 @@ describe('Render Schema Property', () => {
 
     // eslint-disable-next-line max-len
     // |name|required|type|format|default|minimum|exclusiveMinimum|maximum|exclusiveMaximum|minLength|maxLength|pattern|nullable|readOnly|writeOnly|deprecated|
-    expect(schemaContent).toEqual([`### Properties
+    expect(schemaContent).toEqual([`#### Properties
 
 |Name|Required|Type|Format|Default|Minimum|Exclusive Minimum|Maximum|Exclusive Maximum|Min Length|Max Length|`
 + `Unique Items|Pattern|Nullable|Read Only|Write Only|Deprecated|
-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|
+|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|
 |paramA|true|integer|int64|42|0|true|4242|true|1|10|true|nnn|true|true|true|true|`])
   })
 
@@ -44,11 +44,11 @@ describe('Render Schema Property', () => {
 
     // eslint-disable-next-line max-len
     // |name|required|type|format|default|minimum|exclusiveMinimum|maximum|exclusiveMaximum|minLength|maxLength|pattern|nullable|readOnly|writeOnly|deprecated|
-    expect(schemaContent).toEqual([`### Properties
+    expect(schemaContent).toEqual([`#### Properties
 
 |Name|Required|Type|Format|Default|Minimum|Exclusive Minimum|Maximum|Exclusive Maximum|Min Length|Max Length|`
 + `Unique Items|Pattern|Nullable|Read Only|Write Only|Deprecated|
-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|
+|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|
 |paramA|false||||||||||||||||`])
   })
 
@@ -71,18 +71,18 @@ describe('Render Schema Property', () => {
     // eslint-disable-next-line max-len
     // |name|required|type|format|default|minimum|exclusiveMinimum|maximum|exclusiveMaximum|minLength|maxLength|pattern|nullable|readOnly|writeOnly|deprecated|
     expect(schemaContent).toEqual([
-      `### Properties
+      `#### Properties
 
 |Name|Required|Type|Format|Default|Minimum|Exclusive Minimum|Maximum|Exclusive Maximum|Min Length|Max Length|`
 + `Unique Items|Pattern|Nullable|Read Only|Write Only|Deprecated|
-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|
+|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|
 |paramA|false|string|||||||||||||||
 |paramB|false|object (See related table)|||||||||||||||`,
-      `### Properties | paramB
+      `#### Properties -> paramB
 
 |Name|Required|Type|Format|Default|Minimum|Exclusive Minimum|Maximum|Exclusive Maximum|Min Length|Max Length|`
 + `Unique Items|Pattern|Nullable|Read Only|Write Only|Deprecated|
-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|
+|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|
 |paramC|false|boolean|||||||||||||||`,
     ])
   })
@@ -97,14 +97,14 @@ describe('Render Schema Property', () => {
     const schemaContent = schema('Properties', schemaObj)
 
     expect(schemaContent).toEqual([
-      `### Properties
+      `#### Properties
 
 |Name|Required|Type|Format|Default|Minimum|Exclusive Minimum|Maximum|Exclusive Maximum|Min Length|Max Length|`
 + `Unique Items|Pattern|Nullable|Read Only|Write Only|Deprecated|
-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|
+|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|
 |paramA|false|number|||||||||||||||
 
-#### Enums
+**Enums**
 
 * paramA: [1,2,3]`,
     ])
@@ -125,11 +125,11 @@ describe('Render Schema Property', () => {
     const schemaContent = schema('Properties', schemaObj)
 
     expect(schemaContent).toEqual([
-      `### Properties
+      `#### Properties
 
 |Name|Required|Type|Format|Default|Minimum|Exclusive Minimum|Maximum|Exclusive Maximum|Min Length|Max Length|`
 + `Unique Items|Pattern|Nullable|Read Only|Write Only|Deprecated|
-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|
+|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|
 |paramA|false|array of booleans|||||||10|20|true||||||`,
     ])
   })
@@ -151,17 +151,17 @@ describe('Render Schema Property', () => {
     const schemaContent = schema('Properties', schemaObj)
 
     expect(schemaContent).toEqual([
-      `### Properties
+      `#### Properties
 
 |Name|Required|Type|Format|Default|Minimum|Exclusive Minimum|Maximum|Exclusive Maximum|Min Length|Max Length|`
 + `Unique Items|Pattern|Nullable|Read Only|Write Only|Deprecated|
-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|
+|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|
 |paramA|false|array of objects (See related table)|||||||||||||||`,
-      `### Properties | paramA array
+      `#### Properties -> paramA array
 
 |Name|Required|Type|Format|Default|Minimum|Exclusive Minimum|Maximum|Exclusive Maximum|Min Length|Max Length|`
 + `Unique Items|Pattern|Nullable|Read Only|Write Only|Deprecated|
-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|
+|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|
 |paramB|true|string|||||||||||||||
 |paramC|false|integer|||||||||||||||`,
     ])
@@ -188,23 +188,23 @@ describe('Render Schema Property', () => {
     const schemaContent = schema('Properties', schemaObj)
 
     expect(schemaContent).toEqual([
-      `### Properties
+      `#### Properties
 
 |Name|Required|Type|Format|Default|Minimum|Exclusive Minimum|Maximum|Exclusive Maximum|Min Length|Max Length|`
 + `Unique Items|Pattern|Nullable|Read Only|Write Only|Deprecated|
-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|
+|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|
 |paramA|false|array of arrays|||||||||||||||`,
-      `### Properties | paramA items
+      `#### Properties -> paramA items
 
 |Name|Required|Type|Format|Default|Minimum|Exclusive Minimum|Maximum|Exclusive Maximum|Min Length|Max Length|`
 + `Unique Items|Pattern|Nullable|Read Only|Write Only|Deprecated|
-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|
+|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|
 |paramA|false|array of objects (See related table)|||||||||||||||`,
-      `### Properties | paramA items | paramA array
+      `#### Properties -> paramA items -> paramA array
 
 |Name|Required|Type|Format|Default|Minimum|Exclusive Minimum|Maximum|Exclusive Maximum|Min Length|Max Length|`
 + `Unique Items|Pattern|Nullable|Read Only|Write Only|Deprecated|
-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|
+|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|
 |paramC|true|string|||||||||||||||
 |paramD|false|integer|||||||||||||||`,
     ])

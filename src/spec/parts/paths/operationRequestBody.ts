@@ -3,7 +3,7 @@ import { OpenAPIV3 } from 'openapi-types'
 import { templateReplacer } from '../../../util/markdownReplacer'
 import { mediaType } from './mediaType/mediaType'
 
-const requestBodyTitleTemplate = `### Request Body ({{required}})
+const requestBodyTitleTemplate = `## Request Body ({{required}})
 {{description}}
 
 {{mediaTypePart}}
@@ -29,7 +29,7 @@ const generateAllMediaTypes = (mediaTypeContent: { [media: string]: OpenAPIV3.Me
   for(const media of medias) {
     // eslint-disable-next-line security/detect-object-injection
     const mediaTypeObject = mediaTypeContent[media]
-    mediaTypePart = `${mediaTypePart}${mediaType(media, mediaTypeObject)}`
+    mediaTypePart = `${mediaTypePart}\n\n${mediaType(media, mediaTypeObject)}`
   }
 
   return mediaTypePart

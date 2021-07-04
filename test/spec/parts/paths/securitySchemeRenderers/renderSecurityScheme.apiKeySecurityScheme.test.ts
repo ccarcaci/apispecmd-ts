@@ -12,7 +12,7 @@ describe('Render Different Types of Security Schemes', () => {
       },
     }
 
-    expect(renderSecurityScheme(apiKeySecurityScheme)).toBe(`### petstore_auth security (apiKey)
+    expect(renderSecurityScheme(apiKeySecurityScheme)).toBe(`## petstore_auth security (apiKey)
 
 ApiKey authorization
 
@@ -28,7 +28,7 @@ query param: api_key`)
       },
     }
 
-    expect(renderSecurityScheme(apiKeySecurityScheme)).toBe(`### petstore_auth security (apiKey)
+    expect(renderSecurityScheme(apiKeySecurityScheme)).toBe(`## petstore_auth security (apiKey)
 
 query param: api_key`)
   })

@@ -39,12 +39,12 @@ describe('Generate Media Type', () => {
       'Properties',
       { paramA: {} },
       ['paramA'])
-    expect(mediaTypeContent).toBe(`## Fancy params (application/json)
+    expect(mediaTypeContent).toBe(`### Fancy params (application/json)
 The most fancy params in the world
 
 The table
 
-### Fancy params Example
+#### Fancy params Example
 
 \`\`\`
 {
@@ -65,7 +65,7 @@ The table
     }
 
     const mediaTypeContent = mediaType('application/json', mediaTypeObject)
-    expect(mediaTypeContent).toBe(`## (application/json)
+    expect(mediaTypeContent).toBe(`### (application/json)
 
 The table`)
   })
@@ -103,7 +103,7 @@ The table`)
     }
     const mediaTypeContent = mediaType('application/json', mediaTypeObject)
 
-    expect(mediaTypeContent).toBe(`## all of the tables below (application/json)
+    expect(mediaTypeContent).toBe(`### all of the tables below (application/json)
 
 The table
 
@@ -131,7 +131,7 @@ The table`)
     }
     const mediaTypeContent = mediaType('application/json', mediaTypeObject)
 
-    expect(mediaTypeContent).toBe(`## one of the tables below (application/json)
+    expect(mediaTypeContent).toBe(`### one of the tables below (application/json)
 
 The table
 
@@ -163,7 +163,7 @@ The table`)
     }
     const mediaTypeContent = mediaType('application/json', mediaTypeObject)
 
-    expect(mediaTypeContent).toBe(`## one of the tables below (application/json)
+    expect(mediaTypeContent).toBe(`### one of the tables below (application/json)
 
 The table
 
@@ -180,7 +180,7 @@ The table`)
     }
     const mediaTypeContent = mediaType('application/octet-stream', mediaTypeObject)
 
-    expect(mediaTypeContent).toBe(`## (application/octet-stream)
+    expect(mediaTypeContent).toBe(`### (application/octet-stream)
 
 The table`)
   })

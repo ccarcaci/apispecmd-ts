@@ -2,7 +2,7 @@ import { OpenAPIV3 } from 'openapi-types'
 
 import { templateReplacer } from '../../../../util/markdownReplacer'
 
-const openIdSecuritySchemeTemplate = `### {{securityKey}} security (openIdConnect)
+const openIdSecuritySchemeTemplate = `## {{securityKey}} security (openIdConnect)
 
 {{description}}
 

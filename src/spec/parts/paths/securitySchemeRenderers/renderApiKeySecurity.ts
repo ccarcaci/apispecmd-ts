@@ -1,7 +1,7 @@
 import { OpenAPIV3 } from 'openapi-types'
 import { templateReplacer } from '../../../../util/markdownReplacer'
 
-const apiKeySecuritySchemeTemplate = `### {{securityKey}} security (apiKey)
+const apiKeySecuritySchemeTemplate = `## {{securityKey}} security (apiKey)
 
 {{description}}
 

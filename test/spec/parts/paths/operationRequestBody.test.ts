@@ -19,7 +19,7 @@ describe('Generate Request Body Part', () => {
     }
     mediaTypeMock.mockReturnValue('This is the media type part')
 
-    expect(operationRequestBody(requestBody)).toBe(`### Request Body (required)
+    expect(operationRequestBody(requestBody)).toBe(`## Request Body (required)
 This request body is the best one
 
 This is the media type part`)
@@ -33,7 +33,7 @@ This is the media type part`)
     }
     mediaTypeMock.mockReturnValue('This is the media type part')
 
-    expect(operationRequestBody(requestBody)).toBe(`### Request Body (not required)
+    expect(operationRequestBody(requestBody)).toBe(`## Request Body (not required)
 
 This is the media type part`)
   })

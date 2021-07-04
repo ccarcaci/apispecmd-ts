@@ -1,6 +1,6 @@
 import { templateReplacer } from '../../../util/markdownReplacer'
 
-const tagsTemplate = `### Tags
+const tagsTemplate = `## Tags
 
 {{tags}}`
 

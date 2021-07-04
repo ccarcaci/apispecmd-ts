@@ -4,7 +4,7 @@ import { ReplacerKeyValueType } from '../../../util/replacer'
 
 import { server } from './server'
 
-const serverMarkdownTemplate = `## Servers
+const serverMarkdownTemplate = `# Servers
 
 {{serversPart}}`
 

@@ -1,7 +1,7 @@
 import { templateReplacer } from '../../../util/markdownReplacer'
 import { OperationType } from './types/OperationType'
 
-const titleTemplate = `## [{{verb}}] {{path}} ({{operationId}})
+const titleTemplate = `# [{{verb}}] {{path}} ({{operationId}})
 
 {{summary}}
 

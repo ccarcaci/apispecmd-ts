@@ -61,7 +61,7 @@ OpenAPIV3.ArraySchemaObjectType | OpenAPIV3.NonArraySchemaObjectType | undefined
   return (propertyArraySchemaObject.items as OpenAPIV3.SchemaObject).type
 }
 
-const enumsTemplate = `#### Enums
+const enumsTemplate = `**Enums**
 
 {{enums}}`
 const generateEnums = (properties: {[ name: string ]: OpenAPIV3.SchemaObject }): string => {

@@ -4,13 +4,12 @@ import { schema } from './schema/schema'
 import { templateReplacer } from '../../../../util/markdownReplacer'
 import { EmptySchemaError } from './errors/EmptySchemaError'
 
-const mediaTypeTemplate = `## {{mediaTypeTitle}} {{mediaTypeAggregation}} ({{mediaTypeName}})
+const mediaTypeTemplate = `### {{mediaTypeTitle}} {{mediaTypeAggregation}} ({{mediaTypeName}})
 {{mediaTypeDescription}}
 
 {{propertiesTables}}
 
-{{mediaTypeExample}}
-`
+{{mediaTypeExample}}`
 
 const mediaType = (mediaTypeName: string, mediaTypeObject: OpenAPIV3.MediaTypeObject): string => {
   const baseMediaType: OpenAPIV3.NonArraySchemaObject = mediaTypeObject.schema as OpenAPIV3.NonArraySchemaObject
@@ -65,7 +64,7 @@ const generateSchemaTables = (sectionName: string, baseMediaType: OpenAPIV3.NonA
 const generateFlatRepresentation = (baseMediaType: OpenAPIV3.NonArraySchemaObject): string =>
   schema('Content', { content: baseMediaType }, baseMediaType.required).join('\n\n')
 
-const mediaTypeExampleTemplate = `### {{mediaTypeTitle}} Example
+const mediaTypeExampleTemplate = `#### {{mediaTypeTitle}} Example
 
 \`\`\`
 {{mediaTypeExample}}

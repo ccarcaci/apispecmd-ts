@@ -46,9 +46,9 @@ describe('Render Different Types of Security Schemes', () => {
       },
     }
 
-    expect(renderSecurityScheme(oauth2SecurityScheme)).toBe(`### petstore_auth security (oauth2)
+    expect(renderSecurityScheme(oauth2SecurityScheme)).toBe(`## petstore_auth security (oauth2)
 
-#### Implicit Flow
+### Implicit Flow
 
 * authorization: [http://oauth2.implicit.url/auth](http://oauth2.implicit.url/auth)
 * refresh: [http://oauth2.implicit.url/refresh](http://oauth2.implicit.url/refresh)
@@ -58,7 +58,7 @@ Scopes:
 * write:pets: update pets
 * read:pets: get pets
 
-#### Password Flow
+### Password Flow
 
 * token: [http://oauth2.password.url/token](http://oauth2.password.url/token)
 * refresh: [http://oauth2.password.url/refresh](http://oauth2.password.url/refresh)
@@ -68,7 +68,7 @@ Scopes:
 * write:pets: update pets
 * read:pets: get pets
 
-#### Client Credentials Flow
+### Client Credentials Flow
 
 * token: [http://oauth2.clientCredentials.url/token](http://oauth2.clientCredentials.url/token)
 * refresh: [http://oauth2.clientCredentials.url/refresh](http://oauth2.clientCredentials.url/refresh)
@@ -78,7 +78,7 @@ Scopes:
 * write:pets: update pets
 * read:pets: get pets
 
-#### Authorization Code Flow
+### Authorization Code Flow
 
 * authorization: [http://oauth2.authorizationCode.url/auth](http://oauth2.authorizationCode.url/auth)
 * token: [http://oauth2.authorizationCode.url/token](http://oauth2.authorizationCode.url/token)
@@ -106,9 +106,9 @@ Scopes:
       },
     }
 
-    expect(renderSecurityScheme(oauth2SecurityScheme)).toBe(`### petstore_auth security (oauth2)
+    expect(renderSecurityScheme(oauth2SecurityScheme)).toBe(`## petstore_auth security (oauth2)
 
-#### Implicit Flow
+### Implicit Flow
 
 * authorization: [http://oauth2.implicit.url/auth](http://oauth2.implicit.url/auth)
 

@@ -2,7 +2,7 @@ import { OpenAPIV3 } from 'openapi-types'
 import { replacer } from '../../../../../util/replacer'
 import { generateEnums, generateTable } from './tableEnums'
 
-const schemaPartTemplate = `### {{sectionName}}
+const schemaPartTemplate = `#### {{sectionName}}
 
 {{schemaTable}}
 
@@ -39,7 +39,7 @@ const generateSubObjectsSchemas = (
 
       if(property.type === 'object' && property.properties) {
         return schema(
-          `${parentSectionName} | ${propertyName}`,
+          `${parentSectionName} -> ${propertyName}`,
           property.properties as { [name: string]: OpenAPIV3.SchemaObject },
           property.required)
       }
@@ -47,14 +47,14 @@ const generateSubObjectsSchemas = (
         && (property.items as OpenAPIV3.SchemaObject).type === 'object') {
         const propertyItems = property.items as OpenAPIV3.SchemaObject
         return schema(
-          `${parentSectionName} | ${propertyName} array`,
+          `${parentSectionName} -> ${propertyName} array`,
           propertyItems.properties as { [name: string]: OpenAPIV3.SchemaObject },
           propertyItems.required)
       }
       if(property.type === 'array'
         && (property.items as OpenAPIV3.SchemaObject).type === 'array') {
         return schema(
-          `${parentSectionName} | ${propertyName} items`,
+          `${parentSectionName} -> ${propertyName} items`,
           { [propertyName]: { ...property.items as OpenAPIV3.SchemaObject } })
       }
 

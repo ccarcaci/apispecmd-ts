@@ -12,7 +12,7 @@ describe('Render Different Types of Security Schemes', () => {
       },
     }
 
-    expect(renderSecurityScheme(httpSecurityScheme)).toBe(`### petstore_auth security (http)
+    expect(renderSecurityScheme(httpSecurityScheme)).toBe(`## petstore_auth security (http)
 
 Http authorization
 
@@ -27,7 +27,7 @@ bearer (JWT)`)
       },
     }
 
-    expect(renderSecurityScheme(httpSecurityScheme)).toBe(`### petstore_auth security (http)
+    expect(renderSecurityScheme(httpSecurityScheme)).toBe(`## petstore_auth security (http)
 
 bearer`)
   })

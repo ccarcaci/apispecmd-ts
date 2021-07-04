@@ -10,11 +10,11 @@ type FlowSecurity = {
   },
 }
 
-const oauthSecuritySchemeTemplate = `### {{securityKey}} security (oauth2)
+const oauthSecuritySchemeTemplate = `## {{securityKey}} security (oauth2)
 
 {{flows}}`
 
-const flowSchemeTemplate = `#### {{flowName}} Flow
+const flowSchemeTemplate = `### {{flowName}} Flow
 
 {{urls}}
 
