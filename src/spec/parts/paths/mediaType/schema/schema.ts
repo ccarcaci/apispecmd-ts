@@ -12,6 +12,7 @@ const schema = (
   sectionName: string,
   properties: {[ name: string ]: OpenAPIV3.SchemaObject },
   required?: string[]): string[] => {
+  if(hasNoKeys(properties)) { return [] }
   const schemaTable = generateTable(properties, required)
   const schemaEnums = generateEnums(properties)
   const schemaReplacements = {
@@ -60,6 +61,9 @@ const generateSubObjectsSchemas = (
       return []
     })
 }
+
+const hasNoKeys = (properties: {[ name: string ]: OpenAPIV3.SchemaObject }): boolean => 
+  Object.keys(properties).length <= 0
 
 // # ## ### ##### ########
 

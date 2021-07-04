@@ -209,4 +209,11 @@ describe('Render Schema Property', () => {
 |paramD|false|integer|||||||||||||||`,
     ])
   })
+
+  test('Schema has no properties', () => {
+    const schemaObj: { [name: string]: OpenAPIV3.SchemaObject } = { }
+    const schemaContent = schema('Properties', schemaObj)
+    
+    expect(schemaContent).toEqual([])
+  })
 })

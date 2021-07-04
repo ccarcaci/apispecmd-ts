@@ -169,4 +169,19 @@ The table
 
 The table`)
   })
+
+  test('Media Type Schema is a binary string', () => {
+    schemaMock.mockReturnValue(['The table'])
+    const mediaTypeObject: OpenAPIV3.MediaTypeObject = {
+      schema: {
+        type: 'string',
+        format: 'binary',
+      }
+    }
+    const mediaTypeContent = mediaType('application/octet-stream', mediaTypeObject)
+
+    expect(mediaTypeContent).toBe(`## (application/octet-stream)
+
+The table`)
+  })
 })

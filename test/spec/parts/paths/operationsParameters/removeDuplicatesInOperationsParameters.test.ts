@@ -44,8 +44,6 @@ describe('Remove Duplicates in Operations Parameters', () => {
 
   // eslint-disable-next-line max-lines-per-function
   test('A parameter is duplicated', () => {
-    // eslint-disable-next-line no-debugger
-    debugger
     const pathParameters: OpenAPIV3.ParameterObject[] = [
       {
         name: 'paramA',

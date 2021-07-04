@@ -20,6 +20,7 @@ const heading = (writeStream: WriteStream, spec: OpenAPIV3.Document): void => {
   writeStream.write(license(spec.info.license))
   writeStream.write('\n\n')
   writeStream.write(termsOfService(spec.info.termsOfService))
+  writeStream.write('\n\n')
 }
 
 export { heading }

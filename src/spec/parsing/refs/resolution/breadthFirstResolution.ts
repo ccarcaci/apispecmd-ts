@@ -8,7 +8,7 @@ const breadthFirstResolution = (
   knownRefs: string[] = []): unknown | unknown[] => {
   if(!components) { return }
   if(Array.isArray(specNode)) {
-    specNode = specNode.map((element) => breadthFirstResolution(element, components))
+    specNode = specNode.map((element) => breadthFirstResolution(element, components, knownRefs))
     return specNode
   }
   if(typeof specNode === 'object' && specNode !== null) {
@@ -17,7 +17,7 @@ const breadthFirstResolution = (
         if(specNodeKey === '$ref') {
           const $ref = (specNode as OpenAPIV3.ReferenceObject).$ref
           specNode = fetchReference($ref, components)
-          knownRefs = [ ...new Set([ ...knownRefs, $ref ]) ]
+          knownRefs = [...new Set([ ...knownRefs, $ref ])]
           return
         }
 
@@ -25,7 +25,8 @@ const breadthFirstResolution = (
         (specNode as Record<string, unknown>)[specNodeKey] = breadthFirstResolution(
           // eslint-disable-next-line security/detect-object-injection
           (specNode as Record<string, unknown>)[specNodeKey],
-          components)
+          components,
+          knownRefs)
       })
   }
 

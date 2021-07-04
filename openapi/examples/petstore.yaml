@@ -919,7 +919,7 @@ components:
             allOf:
               - description: My Pet
                 title: Pettie
-              - $ref: '#/components/schemas/Pet'
+                $ref: '#/components/schemas/Pet'
         application/xml:
           schema:
             type: 'object'

@@ -3,7 +3,7 @@ import { replacer } from '../../../../../util/replacer'
 
 // eslint-disable-next-line max-len
 const tableTemplate = `|Name|Required|Type|Format|Default|Minimum|Exclusive Minimum|Maximum|Exclusive Maximum|Min Length|Max Length|Unique Items|Pattern|Nullable|Read Only|Write Only|Deprecated|
-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|
+|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|
 {{tableRows}}`
 const generateTable = (properties: {[ name: string ]: OpenAPIV3.SchemaObject }, required?: string[]): string => {
   const isRequired = generateIsRequired(required)

@@ -2,7 +2,7 @@ import fs from 'fs'
 import SwaggerParser from '@apidevtools/swagger-parser'
 import { OpenAPI, OpenAPIV3 } from 'openapi-types'
 import { heading } from './spec/parts/heading'
-import { resolveRefs } from './spec/parsing/refs/resolveRefs'
+// import { resolveRefs } from './spec/parsing/refs/resolveRefs'
 import { paths } from './spec/parts/paths'
 import { logger } from './util/logger'
 
@@ -27,7 +27,7 @@ SwaggerParser.validate(yamlPath, (err: Error | null, api?: OpenAPI.Document) => 
   const writeStream = fs.createWriteStream(outputMarkDownPath, { flags: 'w' })
 
   const specV3 = api as OpenAPIV3.Document
-  resolveRefs(specV3)
+  // resolveRefs(specV3)
   heading(writeStream, specV3)
   paths(writeStream, specV3)
 })

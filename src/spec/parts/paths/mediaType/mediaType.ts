@@ -30,6 +30,8 @@ const mediaType = (mediaTypeName: string, mediaTypeObject: OpenAPIV3.MediaTypeOb
   } else if(baseMediaType.anyOf) {
     propertiesTables = generateAllOneAnyOf('aggregate any of', baseMediaType.anyOf as OpenAPIV3.SchemaObject[])
     mediaTypeAggregation = 'any of the tables below'
+  } else if(!baseMediaType.properties) {
+    propertiesTables = generateFlatRepresentation(baseMediaType)
   } else {
     propertiesTables = generateSchemaTables('Properties', baseMediaType)
   }
@@ -59,6 +61,9 @@ const generateSchemaTables = (sectionName: string, baseMediaType: OpenAPIV3.NonA
 
   return propertiesTables
 }
+
+const generateFlatRepresentation = (baseMediaType: OpenAPIV3.NonArraySchemaObject): string =>
+  schema('Content', { content: baseMediaType }, baseMediaType.required).join('\n\n')
 
 const mediaTypeExampleTemplate = `### {{mediaTypeTitle}} Example
 
