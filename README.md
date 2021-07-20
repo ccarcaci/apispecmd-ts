@@ -6,11 +6,25 @@
 
 ## Table of Contents
 
+- [About the Project](#about-the-project)
+  - [Built on Node.js With](#built-on-nodejs-with)
+- [Usage](#usage)
+  - [Install](#install)
+  - [Launch](#launch)
+  - [Use as Library](#use-as-library)
+- [Docker Image](#docker-image)
+  - [Convert to PDF Using Docker](#convert-to-pdf-using-docker)
+- [Semver](#semver)
+- [Contributing](#contributing)
+  - [Contribution Rules](#contribution-rules)
+  - [Contributors](#contributors)
+- [License](#license)
+
 ## About the Project
 
-apispecmd-ts, as the namme suggests, is a library that converts [OpenAPI 3.0](https://www.openapis.org/) yaml format specs into human-readable Markdown.
+apispecmd-ts, as the namme suggests, is a library that converts [OpenAPI 3.0](https://www.openapis.org/) yaml format specs into human-readable Markdown. This is an opinionated library: the output format, architectural choices and conventions are enforced by the development team to reduce decision burden and code complexity. ([Prettier](https://prettier.io/) is a good example of opinionated library)
 
-The project is still in initial development phase even though it does work.
+The project is still in initial development phase.
 
 ### Built on [Node.js](https://nodejs.org/) With
 
@@ -28,7 +42,7 @@ The project is still in initial development phase even though it does work.
 ### Launch
 `$ SPEC_PATH=/path/to/spec.yaml OUTPUT_PATH=/path/to/output.md npx apispecmd-ts`
 
-### Write Your Own Code to Convert
+### Use as Library
 
 ```typescript
 import { convertApiSpecToMd } from '@bitacode/apispecmd-ts'
@@ -38,13 +52,13 @@ const markdownContent = convertApiSpecToMd('/path/to/spec.yaml')
 console.log(markdownContent)
 ```
 
-## Use the Docker Image
+## Docker Image
 
 TBD
 
 ### Convert to PDF Using Docker
 
-### Semver
+## Semver
 
 This project follows the [Semver specification](https://semver.org/) for versioning.
 
