@@ -1,1 +1,0 @@
-License: [{{info.license.name}}]({{info.license.url}}) | 

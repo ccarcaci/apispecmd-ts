@@ -9,6 +9,7 @@ type OperationType = {
   parameters?: OpenAPIV3.ParameterObject[],
   security: KeySecuritySchemeType[],
   operationObject: OpenAPIV3.OperationObject,
+  tags?: OpenAPIV3.TagObject[],
 }
 
 export { OperationType }

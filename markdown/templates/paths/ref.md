@@ -1,1 +1,0 @@
-Refer to: [{{refName}}]({{refLink}}) ```{{optionality}}```

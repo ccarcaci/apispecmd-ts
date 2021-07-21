@@ -27,6 +27,8 @@ const replacer = (sourceText: string, keyValues?: ReplacerKeyValueType): string 
     .replace(/\[\]/g, '')
     .replace(/ \(\)/g, '()')
     .replace(/\(\)/g, '')
+    .replace(/: $/g, '')
+    .replace(/: +\n/g, '\n')
     .replace(/  +/g, ' ')
     .replace(/ +\n/g, '\n')
     .replace(/\n\n\n+/g, '\n\n')

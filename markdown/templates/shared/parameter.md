@@ -1,4 +1,0 @@
-* **{{name}}**: ```{{paramDefinition}}```
-  > {{description}}
-
-  {{example}}

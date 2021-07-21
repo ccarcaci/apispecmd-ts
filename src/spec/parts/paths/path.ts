@@ -13,7 +13,7 @@ const path = (operation: OperationType): string => {
     operation.parameters, operation.operationObject.parameters as OpenAPIV3.ParameterObject[])
 
   let pathDescription = title(operation)
-  pathDescription = `${pathDescription}\n\n${tags(operation.operationObject.tags)}`
+  pathDescription = `${pathDescription}\n\n${tags(operation.tags)}`
   pathDescription = `${pathDescription}\n\n${securitySchemes}`
   pathDescription = `${pathDescription}\n\n${parameters(params)}`
   pathDescription = `${pathDescription}\n\n`

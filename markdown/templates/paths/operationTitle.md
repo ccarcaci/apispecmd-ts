@@ -1,6 +1,0 @@
-# [{{verb}}] {{path}}
-
-{{summary}}
-
-{{description}}
-
