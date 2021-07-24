@@ -1,7 +1,7 @@
 # apispecmd-ts
 
-[![<CircleCI>](https://circleci.com/gh/ccarcaci/apispecmd-ts.svg?style=shield)](<https://circleci.com/gh/ccarcaci/tokenator>)
-[![npm](https://img.shields.io/npm/v/@bitacode/apispecmd-ts?color=green)](https://www.npmjs.com/package/@bitacode/tokenator)
+[![<CircleCI>](https://circleci.com/gh/ccarcaci/apispecmd-ts.svg?style=shield)](<https://circleci.com/gh/ccarcaci/apispecmd-ts>)
+[![npm](https://img.shields.io/npm/v/@bitacode/apispecmd-ts?color=green)](https://www.npmjs.com/package/@bitacode/apispecmd-ts)
 [![License](https://img.shields.io/npm/l/@bitacode/apispecmd-ts)](https://mit-license.org/)
 
 ## Table of Contents
