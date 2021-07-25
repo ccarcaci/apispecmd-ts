@@ -24,7 +24,7 @@
   },
   "dependencies": {
     "@apidevtools/swagger-parser": "^10.0.2",
-    "openapi-types": "^7.2.3",
+    "openapi-types": "^9.1.0",
     "winston": "^3.3.3"
   },
   "license": "MIT"
