@@ -1,0 +1,12 @@
+.circleci
+.eslintignore
+.gitignore
+.npmignore
+openapi
+src
+test
+
+jest.config.js
+package-lock.json
+tsconfig.build.json
+tsconfig.json
