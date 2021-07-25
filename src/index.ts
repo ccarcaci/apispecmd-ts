@@ -1,16 +1,22 @@
 import fs from 'fs'
 import SwaggerParser from '@apidevtools/swagger-parser'
 import { OpenAPI, OpenAPIV3 } from 'openapi-types'
+
 import { heading } from './spec/parts/heading'
-// import { resolveRefs } from './spec/parsing/refs/resolveRefs'
 import { paths } from './spec/parts/paths'
 import { logger } from './util/logger'
+import { determineOutputFileName } from './util/determineOutputFileName'
 
-const args = process.argv.slice(2)
-const yamlPath = args[0]
-const outputMarkDownPath = args[1] || 'openapi/markdowns/output/spec.md'
+const inputSpec = process.env.INPUT_SPEC
 
-SwaggerParser.validate(yamlPath, (err: Error | null, api?: OpenAPI.Document) => {
+if(inputSpec === undefined) {
+  logger.error('Please provide an input file using INPUT_SPEC env var')
+  process.exit(-1)
+}
+
+const outputMarkdown = determineOutputFileName(inputSpec, process.env.OUTPUT_MARKDOWN)
+
+SwaggerParser.validate(inputSpec, (err: Error | null, api?: OpenAPI.Document) => {
   if (err) {
     logger.error(`ERROR | ${JSON.stringify(err, null, 2)}`)
     return
@@ -21,13 +27,11 @@ SwaggerParser.validate(yamlPath, (err: Error | null, api?: OpenAPI.Document) => 
     return
   }
 
-  logger.info(`Markdown will be saved to ${outputMarkDownPath}`)
+  logger.info(`Markdown will be saved to ${outputMarkdown}`)
 
   // eslint-disable-next-line security/detect-non-literal-fs-filename
-  const writeStream = fs.createWriteStream(outputMarkDownPath, { flags: 'w' })
-
+  const writeStream = fs.createWriteStream(outputMarkdown, { flags: 'w' })
   const specV3 = api as OpenAPIV3.Document
-  // resolveRefs(specV3)
   heading(writeStream, specV3)
   paths(writeStream, specV3)
 })
