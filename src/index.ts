@@ -7,6 +7,7 @@ import { paths } from './spec/parts/paths'
 import { logger } from './util/logger'
 import { determineOutputFileName } from './util/determineOutputFileName'
 
+// eslint-disable-next-line no-process-env
 const inputSpec = process.env.INPUT_SPEC
 
 if(inputSpec === undefined) {
@@ -14,6 +15,7 @@ if(inputSpec === undefined) {
   process.exit(-1)
 }
 
+// eslint-disable-next-line no-process-env
 const outputMarkdown = determineOutputFileName(inputSpec, process.env.OUTPUT_MARKDOWN)
 
 SwaggerParser.validate(inputSpec, (err: Error | null, api?: OpenAPI.Document) => {

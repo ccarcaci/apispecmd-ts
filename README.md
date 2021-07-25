@@ -40,7 +40,7 @@ The project is still in initial development phase.
 `$ npm install @bitacode/apispecmd-ts`
 
 ### Launch
-`$ SPEC_PATH=/path/to/spec.yaml OUTPUT_PATH=/path/to/output.md npx apispecmd-ts`
+`$ INPUT_SPEC=/path/to/spec.yaml OUTPUT_MARKDOWN=/path/to/output.md npx apispecmd-ts`
 
 ### Use as Library
 
@@ -58,6 +58,8 @@ TBD
 
 ### Convert to PDF Using Docker
 
+TBD
+
 ## Semver
 
 This project follows the [Semver specification](https://semver.org/) for versioning.
@@ -67,7 +69,7 @@ This project follows the [Semver specification](https://semver.org/) for version
 
 ## Contributing
 
-This project will not eagerly maintained, the creator is involved with several other projects, so contibutions are strongy welcome.
+This project will not be eagerly maintained, the creator is involved with several other projects, so contibutions are strongy welcome.
 
 To contribute with this repo:
 * Fork the project.

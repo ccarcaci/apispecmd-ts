@@ -176,7 +176,7 @@ The table`)
       schema: {
         type: 'string',
         format: 'binary',
-      }
+      },
     }
     const mediaTypeContent = mediaType('application/octet-stream', mediaTypeObject)
 

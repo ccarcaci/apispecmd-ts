@@ -3,7 +3,9 @@ import { OpenAPIV3 } from 'openapi-types'
 import { operationsMapper } from 'src/spec/parts/paths/operationsMapper'
 import { OperationType } from 'src/spec/parts/paths/types/OperationType'
 
+// eslint-disable-next-line max-lines-per-function
 describe('Given an OpenAPI Spec Create Operations Array', () => {
+  // eslint-disable-next-line max-lines-per-function
   test('Extract tags information', () => {
     const spec: OpenAPIV3.Document = {
       tags: [
@@ -14,7 +16,7 @@ describe('Given an OpenAPI Spec Create Operations Array', () => {
         {
           name: 'store',
           description: 'Access to Petstore orders',
-        }
+        },
       ],
       paths: {
         '/pet': {
