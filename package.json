@@ -27,5 +27,8 @@
     "openapi-types": "^9.1.0",
     "winston": "^3.3.3"
   },
+  "bin": {
+    "apispecmd-ts": "./bin/apispecmd-ts"
+  },
   "license": "MIT"
 }

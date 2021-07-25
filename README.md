@@ -39,8 +39,8 @@ The project is still in initial development phase.
 ### Install
 `$ npm install @bitacode/apispecmd-ts`
 
-### Launch
-`$ INPUT_SPEC=/path/to/spec.yaml OUTPUT_MARKDOWN=/path/to/output.md npx apispecmd-ts`
+### Launch With Command Line
+`$ INPUT_SPEC=/path/to/spec.yaml OUTPUT_MARKDOWN=/path/to/output.md apispecmd-ts`
 
 ### Use as Library
 
