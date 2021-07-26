@@ -6,6 +6,7 @@ openapi
 src
 test
 
+Dockerfile
 jest.config.js
 package-lock.json
 tsconfig.build.json
