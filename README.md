@@ -40,25 +40,53 @@ The project is still in initial development phase.
 `$ npm install @bitacode/apispecmd-ts`
 
 ### Launch With Command Line
-`$ INPUT_SPEC=/path/to/spec.yaml OUTPUT_MARKDOWN=/path/to/output.md apispecmd-ts`
+`$ INPUT_SPEC=/path/to/spec.yaml OUTPUT_MARKDOWN=/path/to/output.md OUTPUT_PDF=/path/to/output.pdf apispecmd-ts`
 
 ### Use as Library
 
 ```typescript
 import { convertApiSpecToMd } from '@bitacode/apispecmd-ts'
 
-const markdownContent = convertApiSpecToMd('/path/to/spec.yaml')
+const markdownContent: string | void = await convertApiSpecToMd('/path/to/spec.yaml')
 
 console.log(markdownContent)
 ```
 
+Function signature is:
+
+```typescript
+const convertApiSpecToMd = async (inputSpec: string, outputMarkdown?: string, outputPdf?: string): Promise<string | void>
+```
+
+If no outputMarkdown is specified the output will be a string, as reported in the above example.
+
+If no outputPdf is provided only the markdown output will be generated.
+
+It is not possible to generate only the PDF without markdown.
+
 ## Docker Image
 
-TBD
+You can find a fully working Docker image on [Dockerhub](https://hub.docker.com/repository/docker/ccarcaci/apispecmd-ts).
+You can build the image by yourself using the [Dockerfile](Dockerfile) in this repo.
 
-### Convert to PDF Using Docker
+### Convert Using Docker
 
-TBD
+```bash
+$ docker run --rm --name apispecmd-ts \
+  --volume /path/to/openapi/spec/folder/:/app/input
+  --volume /path/to/markdown/output/folder/:/app/output
+  --env INPUT_SPEC=input/apispec.yaml \
+  --env OUTPUT_MARKDOWN=output/output-markdown.md \
+  --env OUTPUT_PDF=output/output-pdf.pdf \ # OPTIONAL
+  ccarcaci/apispecmd-ts
+```
+
+Where:
+* `/path/to/openapi/spec/folder/` points to spec host folder where your apispec.yaml file resides.
+* `/path/to/markdown/output/folder` points to the folder where you want to store your markdown result.
+* `INPUT_SPEC=input/apispec.yaml` "input" part is fixed and apispec.yaml is your spec file name.
+* `OUTPUT_MARKDOWN=output/output-markdown.md` "output" part is fixed and output-markdown.md is the desired name of your markdown output.
+* (OPTIONAL) - `OUTPUT_PDF=output/output-pdf.pdf` "output" part is fixed and output-pdf.pdf is the desired name of your pdf output.
 
 ## Semver
 

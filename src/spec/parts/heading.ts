@@ -1,4 +1,4 @@
-import { WriteStream } from 'fs'
+import { Writable } from 'stream'
 import { OpenAPIV3 } from 'openapi-types'
 
 import { title } from './head/title'
@@ -8,7 +8,7 @@ import { apiSupport } from './head/apiSupport'
 import { license } from './head/license'
 import { termsOfService } from './head/termsOfService'
 
-const heading = (writeStream: WriteStream, spec: OpenAPIV3.Document): void => {
+const heading = (writeStream: Writable, spec: OpenAPIV3.Document): void => {
   writeStream.write(title(spec.info))
   writeStream.write('\n\n')
   writeStream.write(description(spec.info))

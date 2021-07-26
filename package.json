@@ -5,7 +5,7 @@
   "homepage": "https://github.com/ccarcaci/apispecmd-ts",
   "scripts": {
     "build": "tsc --project tsconfig.build.json",
-    "start": "npm run build; INPUT_SPEC=openapi/examples/petstore.yaml OUTPUT_MARKDOWN= node build/index.js",
+    "start": "npm run build; INPUT_SPEC=openapi/examples/petstore.yaml OUTPUT_MARKDOWN= OUTPUT_PDF=openapi/out.pdf node build/index.js",
     "test": "jest --passWithNoTests --runInBand"
   },
   "author": "ccarcaci <winston@codeab.it> (https://github.com/ccarcaci)",
@@ -17,6 +17,7 @@
   "types": "build/index.d.ts",
   "devDependencies": {
     "@types/jest": "^26.0.24",
+    "@types/marked": "^2.0.4",
     "@types/node": "^16.4.2",
     "jest": "^27.0.6",
     "ts-jest": "^27.0.4",
@@ -25,6 +26,7 @@
   },
   "dependencies": {
     "@apidevtools/swagger-parser": "^10.0.2",
+    "md-to-pdf": "^4.0.0",
     "openapi-types": "^9.1.0",
     "winston": "^3.3.3"
   },
