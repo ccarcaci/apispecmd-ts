@@ -1,13 +1,13 @@
 import fs from 'fs'
 import SwaggerParser from '@apidevtools/swagger-parser'
 import { OpenAPIV3 } from 'openapi-types'
+import { Stream, Writable } from 'stream'
+import { StringDecoder } from 'string_decoder'
 
 import { heading } from './spec/parts/heading'
 import { paths } from './spec/parts/paths'
 import { logger } from './util/logger'
 import { convertToPdf } from './util/convertToPdf'
-import { Stream, Writable } from 'stream'
-import { StringDecoder } from 'string_decoder'
 
 const convertApiSpecToMd = async (inputSpec: string, outputMarkdown?: string, outputPdf?: string): Promise<string | void> => {
   try {
@@ -28,7 +28,7 @@ const convertApiSpecToMd = async (inputSpec: string, outputMarkdown?: string, ou
 
       if(outputPdf !== undefined) {
         await convertToPdf(outputMarkdown, outputPdf)
-        logger.info(`PDF be saved to ${outputPdf}`)
+        logger.info(`PDF saved to ${outputPdf}`)
       }
     } else {
       return outputString

@@ -1,12 +1,14 @@
 {
   "name": "@bitacode/apispecmd-ts",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Convert your OpenAPI 3.0 specs to markdown",
   "homepage": "https://github.com/ccarcaci/apispecmd-ts",
   "scripts": {
     "build": "tsc --project tsconfig.build.json",
-    "start": "npm run build; INPUT_SPEC=openapi/examples/petstore.yaml OUTPUT_MARKDOWN= OUTPUT_PDF=openapi/out.pdf node build/index.js",
-    "test": "jest --passWithNoTests --runInBand"
+    "start": "npm run build; INPUT_SPEC=openapi/examples/petstore.yaml OUTPUT_MARKDOWN=openapi/output/petstore.md OUTPUT_PDF=openapi/output/petstore.pdf node build/index.js",
+    "test": "jest --passWithNoTests --runInBand",
+    "docker:build": "docker build --tag apispecmd-ts .",
+    "docker:run": "docker run --rm --env INPUT_SPEC=input/petstore.yaml --env OUTPUT_MARKDOWN=output/petstore.md --env OUTPUT_PDF=output/petstore.pdf --volume /home/ccarcaci/git/apispecmd-ts/openapi/examples:/app/input --volume /home/ccarcaci/git/apispecmd-ts/openapi/output:/app/output --name apispecmd-ts apispecmd-ts:latest"
   },
   "author": "ccarcaci <winston@codeab.it> (https://github.com/ccarcaci)",
   "repository": "github:ccarcaci/apispecmd-ts",

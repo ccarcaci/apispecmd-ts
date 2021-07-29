@@ -1,0 +1,11 @@
+.circleci
+build
+node_modules
+openapi
+test
+
+.eslintignore
+.gitignore
+.npmignore
+*.md
+jest.config.js

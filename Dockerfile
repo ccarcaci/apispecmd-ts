@@ -1,16 +1,25 @@
-# docker build --tag apispecmd-ts .
-
-FROM node:lts-alpine3.14
+FROM node:fermium-alpine3.14
 
 WORKDIR /app
 
-COPY apispecmd-ts-0.0.1.tgz .
-RUN npm install --global apispecmd-ts-0.0.1.tgz
-RUN rm apispecmd-ts-0.0.1.tgz
+# Installs latest Chromium (89) package.
+RUN apk add --no-cache \
+      chromium \
+      nss \
+      freetype \
+      harfbuzz \
+      ca-certificates \
+      ttf-freefont
 
-# RUN npm install --global @bitacode/apispecmd-ts
+# Tell Puppeteer to skip installing Chrome. We'll be using the installed package.
+ENV PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=true \
+    PUPPETEER_EXECUTABLE_PATH=/usr/bin/chromium-browser
 
-COPY openapi/examples/petstore.yaml ./input/
-RUN mkdir output
+# Puppeteer v6.0.0 works with Chromium 89.
+RUN npm install --global puppeteer@6.0.0
+
+COPY bitacode-apispecmd-ts-0.0.2.tgz .
+RUN npm install --global bitacode-apispecmd-ts-0.0.2.tgz
+# RUN npm install --global --unsafe-perm @bitacode/apispecmd-ts
 
 CMD [ "apispecmd-ts" ]

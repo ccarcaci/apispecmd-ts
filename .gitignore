@@ -1,4 +1,5 @@
 node_modules
 build
-openapi/markdowns
+openapi/output
 openapi/examples/*.md
+bitacode-apispecmd-ts-*.tgz
