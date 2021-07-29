@@ -18,8 +18,6 @@ ENV PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=true \
 # Puppeteer v6.0.0 works with Chromium 89.
 RUN npm install --global puppeteer@6.0.0
 
-COPY bitacode-apispecmd-ts-0.0.2.tgz .
-RUN npm install --global bitacode-apispecmd-ts-0.0.2.tgz
-# RUN npm install --global --unsafe-perm @bitacode/apispecmd-ts
+RUN npm install --global @bitacode/apispecmd-ts
 
 CMD [ "apispecmd-ts" ]
