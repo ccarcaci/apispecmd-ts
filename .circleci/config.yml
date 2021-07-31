@@ -34,7 +34,7 @@ jobs:
       - persist_to_workspace:
           root: ~/repo
           paths: .
-  publish:
+  publisnodelib:
     <<: *defaults
     steps:
       - attach_workspace:
@@ -45,6 +45,31 @@ jobs:
       - run:
           name: Publish package
           command: npm publish --access public
+  publishdockerimage:
+    <<: *defaults
+    steps:
+      - attach_workspace:
+          at: ~/repo
+      - run:
+          name: Build Docker image
+          command: docker build --tag apispecmd-ts .
+      - run:
+          name: Login to Docker
+          command: docker login -e $DOCKER_HUB_EMAIL -u $DOCKER_HUB_USER_ID $DOCKER_HUB_PWD
+#      - run:
+#          name: Tag and push latest
+#          command: |
+#            docker tag apispecmd-ts $DOCKER_HUB_USER_ID/apispecmd-ts:latest
+#            docker push $DOCKER_HUB_USER_ID/apispecmd-ts:latest
+      - run:
+          name: Tag and push tag version
+          command: |
+            echo $CIRCLE_TAG
+#            docker tag apispecmd-ts $DOCKER_HUB_USER_ID/apispecmd-ts:$CIRCLE_TAG
+#            docker push $DOCKER_HUB_USER_ID/apispecmd-ts:CIRCLE_TAG
+      - run:
+          name: Logout from Docker
+          command: docker logout
 
 workflows:
   version: 2
@@ -60,9 +85,17 @@ workflows:
           filters:
             tags:
               only: /^v.*/
-      - publish:
+      - publisnodelib:
           requires:
             - test
+          filters:
+            tags:
+              only: /^v.*/
+            branches:
+              ignore: /.*/
+      - publishdockerimage:
+          requied:
+            - publishnodelib
           filters:
             tags:
               only: /^v.*/
