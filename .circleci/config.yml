@@ -48,6 +48,8 @@ jobs:
   publishdockerimage:
     <<: *defaults
     steps:
+      - setup_remote_docker:
+          version: 20.10.6
       - attach_workspace:
           at: ~/repo
       - run:
