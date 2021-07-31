@@ -34,7 +34,7 @@ jobs:
       - persist_to_workspace:
           root: ~/repo
           paths: .
-  publisnodelib:
+  publishnodelib:
     <<: *defaults
     steps:
       - attach_workspace:
@@ -79,13 +79,17 @@ workflows:
           filters:
             tags:
               only: /^v.*/
+            branches:
+              only: master
       - test:
           requires:
             - build
           filters:
             tags:
               only: /^v.*/
-      - publisnodelib:
+            branches:
+              only: master
+      - publishnodelib:
           requires:
             - test
           filters:
