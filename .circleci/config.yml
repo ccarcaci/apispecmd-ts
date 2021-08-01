@@ -57,7 +57,7 @@ jobs:
           command: docker build --tag apispecmd-ts .
       - run:
           name: Login to Docker
-          command: docker login -e $DOCKER_HUB_EMAIL -u $DOCKER_HUB_USER_ID $DOCKER_HUB_PWD
+          command: docker login --username $DOCKER_HUB_USER_ID --password $DOCKER_HUB_PWD
 #      - run:
 #          name: Tag and push latest
 #          command: |

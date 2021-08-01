@@ -1,6 +1,6 @@
 {
   "name": "@bitacode/apispecmd-ts",
-  "version": "0.0.3-test2",
+  "version": "0.0.3-test4",
   "description": "Convert your OpenAPI 3.0 specs to markdown",
   "homepage": "https://github.com/ccarcaci/apispecmd-ts",
   "scripts": {
