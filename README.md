@@ -36,6 +36,11 @@ The project is still in initial development phase.
 
 ## Usage
 
+### Current Version
+
+The project is currently in official development release, thus the first working version is `v0.1.0`. No major version has been released yet.
+Versions prior to `v0.1.0` (`v0.0.x`) are intended for embrional state of this project, their usage is discouraged.
+
 ### Install
 `$ npm install @bitacode/apispecmd-ts`
 
@@ -90,7 +95,7 @@ Where:
 
 ## Semver
 
-This project follows the [Semver specification](https://semver.org/) for versioning.
+This project follows the [Semver specification](https://semver.org/) for versioning starting from `v1.0.0`
 
 * Major releases of [OpenAPI](https://www.openapis.org/) specification results in major release of the library.
 * Notable changes in the output format of Markdown output result in a minor release of the library.
