@@ -10,13 +10,14 @@ const convertToPdf = async (path: string, dest: string): Promise<void> => {
       {
         dest,
         //@ts-ignore
-        launch_options: { args: [ '--no-sandbox' ] },
-      })
+        launch_options: { args: ['--no-sandbox'] },
+      }
+    )
 
     if (pdf) {
-      fs.writeFileSync(dest, pdf.content);
+      fs.writeFileSync(dest, pdf.content)
     }
-  } catch(error) {
+  } catch (error) {
     logger.error(error)
   }
 }

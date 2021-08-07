@@ -23,9 +23,7 @@ describe('Given an OpenAPI Spec Create Operations Array', () => {
           summary: 'Pet API',
           description: 'Manage your pet',
           get: {
-            tags: [
-              'pet',
-            ],
+            tags: ['pet'],
           },
         },
       },
@@ -45,9 +43,7 @@ describe('Given an OpenAPI Spec Create Operations Array', () => {
           },
         ],
         operationObject: {
-          tags: [
-            'pet',
-          ],
+          tags: ['pet'],
         },
       } as OperationType,
     ])

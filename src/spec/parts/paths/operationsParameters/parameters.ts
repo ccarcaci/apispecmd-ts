@@ -2,14 +2,12 @@ import { OpenAPIV3 } from 'openapi-types'
 import { templateReplacer } from '../../../../util/markdownReplacer'
 
 const parameters = (params: OpenAPIV3.ParameterObject[]): string => {
-  if(params.length <= 0) { return '' }
+  if (params.length <= 0) {
+    return ''
+  }
 
-  const parametersRows = params
-    .map((param) => generateParameterRow(param))
-    .join('\n')
-  const parametersDescriptions = params
-    .map((param) => generateParameterDescription(param))
-    .join('\n')
+  const parametersRows = params.map((param) => generateParameterRow(param)).join('\n')
+  const parametersDescriptions = params.map((param) => generateParameterDescription(param)).join('\n')
 
   return `## Parameters
 
@@ -35,14 +33,22 @@ const generateParameterRow = (param: OpenAPIV3.ParameterObject): string => {
     allowReserved: 'no',
   }
 
-  if((param.schema as OpenAPIV3.SchemaObject)?.type) {
+  if ((param.schema as OpenAPIV3.SchemaObject)?.type) {
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     templateReplacements.type = (param.schema as OpenAPIV3.SchemaObject).type!
   }
-  if(param.required) { templateReplacements.required = 'yes' }
-  if(param.deprecated) { templateReplacements.deprecated = 'yes' }
-  if(param.explode) { templateReplacements.explode = 'yes' }
-  if(param.allowReserved) { templateReplacements.allowReserved = 'yes' }
+  if (param.required) {
+    templateReplacements.required = 'yes'
+  }
+  if (param.deprecated) {
+    templateReplacements.deprecated = 'yes'
+  }
+  if (param.explode) {
+    templateReplacements.explode = 'yes'
+  }
+  if (param.allowReserved) {
+    templateReplacements.allowReserved = 'yes'
+  }
 
   return templateReplacer(parameterTableRowTemplate, templateReplacements)
 }
@@ -51,7 +57,9 @@ const parameterDescriptionTemplate = '* {{name}}: {{description}}'
 const generateParameterDescription = (param: OpenAPIV3.ParameterObject): string => {
   let description = 'No description provided'
 
-  if(param.description) { description = param.description }
+  if (param.description) {
+    description = param.description
+  }
 
   const templateReplacements = {
     name: param.name,

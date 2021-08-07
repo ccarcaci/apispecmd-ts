@@ -3,7 +3,9 @@ import { templateReplacer } from '../../../util/markdownReplacer'
 const termsOfServiceTemplate = '[Terms of Service]({{termsOfServiceUrl}})'
 
 const termsOfService = (termsOfService?: string): string => {
-  if(!termsOfService) { return '' }
+  if (!termsOfService) {
+    return ''
+  }
 
   const replacer = { termsOfServiceUrl: termsOfService }
 

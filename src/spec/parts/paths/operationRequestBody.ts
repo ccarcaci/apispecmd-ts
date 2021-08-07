@@ -26,7 +26,7 @@ const generateAllMediaTypes = (mediaTypeContent: { [media: string]: OpenAPIV3.Me
   const medias = Object.keys(mediaTypeContent)
   let mediaTypePart = ''
 
-  for(const media of medias) {
+  for (const media of medias) {
     // eslint-disable-next-line security/detect-object-injection
     const mediaTypeObject = mediaTypeContent[media]
     mediaTypePart = `${mediaTypePart}\n\n${mediaType(media, mediaTypeObject)}`

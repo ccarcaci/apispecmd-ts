@@ -11,7 +11,4 @@ const mdFileReplacer = (templatePath: string, keyValues?: ReplacerKeyValueType):
   return replacer(content, keyValues)
 }
 
-export {
-  mdFileReplacer,
-  templateReplacer,
-}
+export { mdFileReplacer, templateReplacer }

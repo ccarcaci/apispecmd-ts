@@ -10,9 +10,12 @@ const schemaPartTemplate = `#### {{sectionName}}
 
 const schema = (
   sectionName: string,
-  properties: {[ name: string ]: OpenAPIV3.SchemaObject },
-  required?: string[]): string[] => {
-  if(hasNoKeys(properties)) { return [] }
+  properties: { [name: string]: OpenAPIV3.SchemaObject },
+  required?: string[]
+): string[] => {
+  if (hasNoKeys(properties)) {
+    return []
+  }
   const schemaTable = generateTable(properties, required)
   const schemaEnums = generateEnums(properties)
   const schemaReplacements = {
@@ -23,46 +26,46 @@ const schema = (
   const schemaPart = replacer(schemaPartTemplate, schemaReplacements)
   const subObjectsSchemas: string[] = generateSubObjectsSchemas(sectionName, properties)
 
-  return [ schemaPart, ...subObjectsSchemas ]
+  return [schemaPart, ...subObjectsSchemas]
 }
 
 // # ## ### ##### ########
 
 const generateSubObjectsSchemas = (
   parentSectionName: string,
-  properties: {[ name: string ]: OpenAPIV3.SchemaObject }): string[] => {
+  properties: { [name: string]: OpenAPIV3.SchemaObject }
+): string[] => {
   const propertiesNames = Object.keys(properties)
-  return propertiesNames
-    .flatMap((propertyName) => {
-      // eslint-disable-next-line security/detect-object-injection
-      const property = properties[propertyName]
+  return propertiesNames.flatMap((propertyName) => {
+    // eslint-disable-next-line security/detect-object-injection
+    const property = properties[propertyName]
 
-      if(property.type === 'object' && property.properties) {
-        return schema(
-          `${parentSectionName} -> ${propertyName}`,
-          property.properties as { [name: string]: OpenAPIV3.SchemaObject },
-          property.required)
-      }
-      if(property.type === 'array'
-        && (property.items as OpenAPIV3.SchemaObject).type === 'object') {
-        const propertyItems = property.items as OpenAPIV3.SchemaObject
-        return schema(
-          `${parentSectionName} -> ${propertyName} array`,
-          propertyItems.properties as { [name: string]: OpenAPIV3.SchemaObject },
-          propertyItems.required)
-      }
-      if(property.type === 'array'
-        && (property.items as OpenAPIV3.SchemaObject).type === 'array') {
-        return schema(
-          `${parentSectionName} -> ${propertyName} items`,
-          { [propertyName]: { ...property.items as OpenAPIV3.SchemaObject } })
-      }
+    if (property.type === 'object' && property.properties) {
+      return schema(
+        `${parentSectionName} -> ${propertyName}`,
+        property.properties as { [name: string]: OpenAPIV3.SchemaObject },
+        property.required
+      )
+    }
+    if (property.type === 'array' && (property.items as OpenAPIV3.SchemaObject).type === 'object') {
+      const propertyItems = property.items as OpenAPIV3.SchemaObject
+      return schema(
+        `${parentSectionName} -> ${propertyName} array`,
+        propertyItems.properties as { [name: string]: OpenAPIV3.SchemaObject },
+        propertyItems.required
+      )
+    }
+    if (property.type === 'array' && (property.items as OpenAPIV3.SchemaObject).type === 'array') {
+      return schema(`${parentSectionName} -> ${propertyName} items`, {
+        [propertyName]: { ...(property.items as OpenAPIV3.SchemaObject) },
+      })
+    }
 
-      return []
-    })
+    return []
+  })
 }
 
-const hasNoKeys = (properties: {[ name: string ]: OpenAPIV3.SchemaObject }): boolean =>
+const hasNoKeys = (properties: { [name: string]: OpenAPIV3.SchemaObject }): boolean =>
   Object.keys(properties).length <= 0
 
 // # ## ### ##### ########

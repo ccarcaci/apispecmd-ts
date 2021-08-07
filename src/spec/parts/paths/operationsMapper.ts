@@ -9,17 +9,21 @@ const createOperationType = (
   path: string,
   security: KeySecuritySchemeType[],
   pathItemObject: OpenAPIV3.PathItemObject,
-  specTags?: OpenAPIV3.TagObject[]): OperationType | undefined => {
-  const operationObject = verb === 'GET' && pathItemObject.get
-    || verb === 'PUT' && pathItemObject.put
-    || verb === 'POST' && pathItemObject.post
-    || verb === 'DELETE' && pathItemObject.delete
-    || verb === 'OPTIONS' && pathItemObject.options
-    || verb === 'HEAD' && pathItemObject.head
-    || verb === 'PATCH' && pathItemObject.patch
-    || verb === 'TRACE' && pathItemObject.trace
+  specTags?: OpenAPIV3.TagObject[]
+): OperationType | undefined => {
+  const operationObject =
+    (verb === 'GET' && pathItemObject.get) ||
+    (verb === 'PUT' && pathItemObject.put) ||
+    (verb === 'POST' && pathItemObject.post) ||
+    (verb === 'DELETE' && pathItemObject.delete) ||
+    (verb === 'OPTIONS' && pathItemObject.options) ||
+    (verb === 'HEAD' && pathItemObject.head) ||
+    (verb === 'PATCH' && pathItemObject.patch) ||
+    (verb === 'TRACE' && pathItemObject.trace)
 
-  if(!operationObject) { return }
+  if (!operationObject) {
+    return
+  }
 
   const summary = pathItemObject.summary
   const description = pathItemObject.description
@@ -42,7 +46,9 @@ const operationsMapper = (spec: OpenAPIV3.Document): OperationType[] => {
   const paths = Object.keys(spec.paths)
   const operations = paths.flatMap((path) => {
     // eslint-disable-next-line security/detect-object-injection
-    if(!spec.paths[path]) { return [] }
+    if (!spec.paths[path]) {
+      return []
+    }
 
     // eslint-disable-next-line security/detect-object-injection
     const pathItem = spec.paths[path] as OpenAPIV3.PathItemObject
@@ -66,8 +72,10 @@ const operationsMapper = (spec: OpenAPIV3.Document): OperationType[] => {
 // # ## ### ##### ########
 
 const filterOutTags = (tags?: string[], specTags?: OpenAPIV3.TagObject[]): OpenAPIV3.TagObject[] | undefined => {
-  if(tags === undefined) { return }
-  if(specTags === undefined) {
+  if (tags === undefined) {
+    return
+  }
+  if (specTags === undefined) {
     return tags.map((tag) => ({ name: tag }))
   }
 

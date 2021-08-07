@@ -7,18 +7,20 @@ describe('Generate Operation Parameters Table and Paragraph', () => {
   test('No params specified', () => expect(parameters([])).toBe(''))
 
   test('Complete parameter definition', () => {
-    const params: OpenAPIV3.ParameterObject[] = [{
-      description: 'The fundamental param',
-      name: 'fancyParam',
-      in: 'query',
-      required: true,
-      deprecated: true,
-      explode: true,
-      allowReserved: true,
-      schema: {
-        type: 'number',
+    const params: OpenAPIV3.ParameterObject[] = [
+      {
+        description: 'The fundamental param',
+        name: 'fancyParam',
+        in: 'query',
+        required: true,
+        deprecated: true,
+        explode: true,
+        allowReserved: true,
+        schema: {
+          type: 'number',
+        },
       },
-    }]
+    ]
     const paramsMd = parameters(params)
 
     expect(paramsMd).toBe(`## Parameters
@@ -34,10 +36,12 @@ describe('Generate Operation Parameters Table and Paragraph', () => {
   })
 
   test('Minimal parameter definition', () => {
-    const params: OpenAPIV3.ParameterObject[] = [{
-      name: 'fancyParam',
-      in: 'query',
-    }]
+    const params: OpenAPIV3.ParameterObject[] = [
+      {
+        name: 'fancyParam',
+        in: 'query',
+      },
+    ]
     const paramsMd = parameters(params)
 
     expect(paramsMd).toBe(`## Parameters

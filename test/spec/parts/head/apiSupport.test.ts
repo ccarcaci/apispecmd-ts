@@ -13,14 +13,20 @@ describe('Generate API Support part', () => {
   test('Only email is provided', () =>
     expect(apiSupport({ email: 'support@eenie' })).toBe('API Support: [support@eenie](support@eenie) | '))
 
-  test('Name and url are provided', () => expect(apiSupport({
-    name: 'Sally',
-    url: 'support.url',
-  })).toBe('API Support: Sally [support.url](support.url) | '))
+  test('Name and url are provided', () =>
+    expect(
+      apiSupport({
+        name: 'Sally',
+        url: 'support.url',
+      })
+    ).toBe('API Support: Sally [support.url](support.url) | '))
 
-  test('Name, url and email are provided', () => expect(apiSupport({
-    email: 'support@eenie',
-    name: 'Sally',
-    url: 'support.url',
-  })).toBe('API Support: Sally [support@eenie](support@eenie) [support.url](support.url) | '))
+  test('Name, url and email are provided', () =>
+    expect(
+      apiSupport({
+        email: 'support@eenie',
+        name: 'Sally',
+        url: 'support.url',
+      })
+    ).toBe('API Support: Sally [support@eenie](support@eenie) [support.url](support.url) | '))
 })

@@ -40,7 +40,7 @@ describe('Operations Mapper Edge Cases', () => {
     const spec: OpenAPIV3.Document = {
       security: [
         {
-          http_auth: [ ],
+          http_auth: [],
         },
       ],
       components: {

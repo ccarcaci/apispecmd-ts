@@ -21,9 +21,7 @@ describe('Generate Media Type', () => {
         title: 'Fancy params',
         description: 'The most fancy params in the world',
         type: 'object',
-        required: [
-          'paramA',
-        ],
+        required: ['paramA'],
         properties: {
           paramA: {},
         },
@@ -35,10 +33,7 @@ describe('Generate Media Type', () => {
 
     const mediaTypeContent = mediaType('application/json', mediaTypeObject)
 
-    expect(schemaMock).toBeCalledWith(
-      'Properties',
-      { paramA: {} },
-      ['paramA'])
+    expect(schemaMock).toBeCalledWith('Properties', { paramA: {} }, ['paramA'])
     expect(mediaTypeContent).toBe(`### Fancy params (application/json)
 The most fancy params in the world
 
@@ -77,7 +72,7 @@ The table`)
 
     try {
       mediaType('application/json', mediaTypeObject)
-    } catch(error) {
+    } catch (error) {
       expect(error).toBeInstanceOf(EmptySchemaError)
     }
   })

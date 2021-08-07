@@ -10,7 +10,9 @@ import { OperationType } from './types/OperationType'
 const path = (operation: OperationType): string => {
   const securitySchemes = operation.security.map((sec) => renderSecurityScheme(sec)).join('\n\n')
   const params = removeDuplicatedParameters(
-    operation.parameters, operation.operationObject.parameters as OpenAPIV3.ParameterObject[])
+    operation.parameters,
+    operation.operationObject.parameters as OpenAPIV3.ParameterObject[]
+  )
 
   let pathDescription = title(operation)
   pathDescription = `${pathDescription}\n\n${tags(operation.tags)}`
@@ -18,9 +20,10 @@ const path = (operation: OperationType): string => {
   pathDescription = `${pathDescription}\n\n${parameters(params)}`
   pathDescription = `${pathDescription}\n\n`
 
-  if(operation.operationObject.requestBody) {
+  if (operation.operationObject.requestBody) {
     pathDescription = `${pathDescription}${operationRequestBody(
-      operation.operationObject.requestBody as OpenAPIV3.RequestBodyObject)}`
+      operation.operationObject.requestBody as OpenAPIV3.RequestBodyObject
+    )}`
   }
 
   return pathDescription

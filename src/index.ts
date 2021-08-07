@@ -5,7 +5,7 @@ import { convertApiSpecToMd } from './convertApiSpecToMd'
 // eslint-disable-next-line no-process-env
 const inputSpec = process.env.INPUT_SPEC
 
-if(inputSpec === undefined) {
+if (inputSpec === undefined) {
   logger.error('Please provide an input file using INPUT_SPEC env var')
   process.exit(-1)
 }
@@ -15,8 +15,6 @@ const outputMarkdown = determineOutputFileName(inputSpec, process.env.OUTPUT_MAR
 // eslint-disable-next-line no-process-env
 const outputPdf = process.env.OUTPUT_PDF
 
-;
-
-(async () => await convertApiSpecToMd(inputSpec, outputMarkdown, outputPdf))()
+;(async () => await convertApiSpecToMd(inputSpec, outputMarkdown, outputPdf))()
 
 export { convertApiSpecToMd }

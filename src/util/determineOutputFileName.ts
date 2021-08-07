@@ -1,7 +1,9 @@
 import { idGenerator } from './idGenerator'
 
 const determineOutputFileName = (inputFilePath: string, outputFilePath?: string): string => {
-  if(outputFilePath) { return outputFilePath }
+  if (outputFilePath) {
+    return outputFilePath
+  }
 
   const path = inputFilePath.replace(/.yaml$/, '')
   const identifier = idGenerator()

@@ -13,12 +13,12 @@ jobs:
       - checkout
       - restore_cache:
           keys:
-          - v1-dependencies-{{ checksum "package.json" }}
-          - v1-dependencies-
+            - v1-dependencies-{{ checksum "package.json" }}
+            - v1-dependencies-
       - run: npm install
       - persist_to_workspace:
           root: ~/repo
-          paths: [ . ]
+          paths: [.]
   test:
     <<: *defaults
     steps:
@@ -33,7 +33,7 @@ jobs:
           key: v1-dependencies-{{ checksum "package.json" }}
       - persist_to_workspace:
           root: ~/repo
-          paths: [ . ]
+          paths: [.]
   publishnodelib:
     <<: *defaults
     steps:

@@ -10,10 +10,7 @@ describe('Extract Security Specific to Operation', () => {
     const spec: OpenAPIV3.Document = {
       security: [
         {
-          petstore_auth: [
-            'write:pets',
-            'read:pets',
-          ],
+          petstore_auth: ['write:pets', 'read:pets'],
         },
         {
           http_auth: [],
@@ -76,10 +73,7 @@ describe('Extract Security Specific to Operation', () => {
     const spec: OpenAPIV3.Document = {
       security: [
         {
-          petstore_auth: [
-            'write:pets',
-            'read:pets',
-          ],
+          petstore_auth: ['write:pets', 'read:pets'],
           http_auth: [],
         },
       ],
@@ -138,9 +132,7 @@ describe('Extract Security Specific to Operation', () => {
     const spec: OpenAPIV3.Document = {
       security: [
         {
-          petstore_auth: [
-            'write:pets',
-          ],
+          petstore_auth: ['write:pets'],
         },
       ],
       components: {
@@ -185,10 +177,7 @@ describe('Extract Security Specific to Operation', () => {
     const spec: OpenAPIV3.Document = {
       security: [
         {
-          petstore_auth: [
-            'write:pets',
-            'read:pets',
-          ],
+          petstore_auth: ['write:pets', 'read:pets'],
         },
       ],
       components: {
@@ -216,9 +205,7 @@ describe('Extract Security Specific to Operation', () => {
     } as unknown as OpenAPIV3.Document
 
     const operationObject: OpenAPIV3.OperationObject = {
-      security: [
-        { http_auth: [] },
-      ],
+      security: [{ http_auth: [] }],
     }
 
     expect(securityMapper(spec, operationObject)).toStrictEqual([

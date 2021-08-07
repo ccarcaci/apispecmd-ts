@@ -1,5 +1,5 @@
 type ReplacerKeyValueType = {
-  [key: string]: string | number | boolean | null | undefined,
+  [key: string]: string | number | boolean | null | undefined
 }
 
 const replacer = (sourceText: string, keyValues?: ReplacerKeyValueType): string => {
@@ -7,12 +7,16 @@ const replacer = (sourceText: string, keyValues?: ReplacerKeyValueType): string 
   transformedSourceText = transformedSourceText.split(/ +}}/).join('}}')
   transformedSourceText = transformedSourceText.split('{{}}').join('')
 
-  if(!keyValues ) { return transformedSourceText }
+  if (!keyValues) {
+    return transformedSourceText
+  }
 
   const keys = Object.keys(keyValues)
 
-  if(keys.length <= 0) { return transformedSourceText }
-  if(keys.length > 1) {
+  if (keys.length <= 0) {
+    return transformedSourceText
+  }
+  if (keys.length > 1) {
     // eslint-disable-next-line security/detect-object-injection
     return keys.reduce((accumulator, key) => replacer(accumulator, { [key]: keyValues[key] }), transformedSourceText)
   }
@@ -38,7 +42,9 @@ const replacer = (sourceText: string, keyValues?: ReplacerKeyValueType): string 
 // # ## ### ##### ########
 
 const stringifyValue = (value: string | number | boolean | null | undefined): string => {
-  if(value === null || value === undefined) { return '' }
+  if (value === null || value === undefined) {
+    return ''
+  }
   return `${value}`
 }
 

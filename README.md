@@ -1,6 +1,6 @@
 # apispecmd-ts
 
-[![<CircleCI>](https://circleci.com/gh/ccarcaci/apispecmd-ts.svg?style=shield)](<https://circleci.com/gh/ccarcaci/apispecmd-ts>)
+[![<CircleCI>](https://circleci.com/gh/ccarcaci/apispecmd-ts.svg?style=shield)](https://circleci.com/gh/ccarcaci/apispecmd-ts)
 [![npm](https://img.shields.io/npm/v/@bitacode/apispecmd-ts?color=green)](https://www.npmjs.com/package/@bitacode/apispecmd-ts)
 [![License](https://img.shields.io/npm/l/@bitacode/apispecmd-ts)](https://mit-license.org/)
 
@@ -28,11 +28,11 @@ The project is still in initial development phase.
 
 ### Built on [Node.js](https://nodejs.org/) With
 
-* [Jest](https://jestjs.io/)
-* [openapi-types](https://github.com/kogosoftwarellc/open-api/tree/master/packages/openapi-types)
-* [Swagger Parser](https://apitools.dev/swagger-parser/)
-* [Typescript](https://www.typescriptlang.org/)
-* [Winston](https://github.com/winstonjs/winston)
+- [Jest](https://jestjs.io/)
+- [openapi-types](https://github.com/kogosoftwarellc/open-api/tree/master/packages/openapi-types)
+- [Swagger Parser](https://apitools.dev/swagger-parser/)
+- [Typescript](https://www.typescriptlang.org/)
+- [Winston](https://github.com/winstonjs/winston)
 
 ## Usage
 
@@ -42,9 +42,11 @@ The project is currently in official development release, thus the first working
 Versions prior to `v0.1.0` (`v0.0.x`) are intended for embrional state of this project, their usage is discouraged.
 
 ### Install
+
 `$ npm install @bitacode/apispecmd-ts`
 
 ### Launch With Command Line
+
 `$ INPUT_SPEC=/path/to/spec.yaml OUTPUT_MARKDOWN=/path/to/output.md OUTPUT_PDF=/path/to/output.pdf apispecmd-ts`
 
 ### Use as Library
@@ -87,41 +89,43 @@ $ docker run --rm --name apispecmd-ts \
 ```
 
 Where:
-* `/path/to/openapi/spec/folder/` points to spec host folder where your apispec.yaml file resides.
-* `/path/to/markdown/output/folder` points to the folder where you want to store your markdown result.
-* `INPUT_SPEC=input/apispec.yaml` "input" part is fixed and apispec.yaml is your spec file name.
-* `OUTPUT_MARKDOWN=output/output-markdown.md` "output" part is fixed and output-markdown.md is the desired name of your markdown output.
-* (OPTIONAL) - `OUTPUT_PDF=output/output-pdf.pdf` "output" part is fixed and output-pdf.pdf is the desired name of your pdf output.
+
+- `/path/to/openapi/spec/folder/` points to spec host folder where your apispec.yaml file resides.
+- `/path/to/markdown/output/folder` points to the folder where you want to store your markdown result.
+- `INPUT_SPEC=input/apispec.yaml` "input" part is fixed and apispec.yaml is your spec file name.
+- `OUTPUT_MARKDOWN=output/output-markdown.md` "output" part is fixed and output-markdown.md is the desired name of your markdown output.
+- (OPTIONAL) - `OUTPUT_PDF=output/output-pdf.pdf` "output" part is fixed and output-pdf.pdf is the desired name of your pdf output.
 
 ## Semver
 
 This project follows the [Semver specification](https://semver.org/) for versioning starting from `v1.0.0`
 
-* Major releases of [OpenAPI](https://www.openapis.org/) specification results in major release of the library.
-* Notable changes in the output format of Markdown output result in a minor release of the library.
+- Major releases of [OpenAPI](https://www.openapis.org/) specification results in major release of the library.
+- Notable changes in the output format of Markdown output result in a minor release of the library.
 
 ## Contributing
 
 This project will not be eagerly maintained, the creator is involved with several other projects, so contibutions are strongy welcome.
 
 To contribute with this repo:
-* Fork the project.
-* Create your feature branch with the following naming convention.
-`feature/the-new-fancy-feat`
-* Commit your changes.
-* Create a PR.
+
+- Fork the project.
+- Create your feature branch with the following naming convention.
+  `feature/the-new-fancy-feat`
+- Commit your changes.
+- Create a PR.
 
 ### Contibution Rules
 
 In order to contribute with this project there are some rules to follow.
 
-* Provided code must be covered with unit tests.
-* Correct conversion proof must be provided alongside the PR.
-* These [Eslint rules](...) must be fullfilled (download them and integrate with your editor).
+- Provided code must be covered with unit tests.
+- Correct conversion proof must be provided alongside the PR.
+- These [Eslint rules](...) must be fullfilled (download them and integrate with your editor).
 
 ### Contributors
 
-* [Claudio Carcaci](https://www.linkedin.com/in/ccarcaci/) - Creator
+- [Claudio Carcaci](https://www.linkedin.com/in/ccarcaci/) - Creator
 
 ## License
 

@@ -11,7 +11,6 @@ const server = (spec: OpenAPIV3.ServerObject): string => {
   }
 
   return templateReplacer(serverTemplate, replacer)
-
 }
 
 export { server }

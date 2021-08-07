@@ -9,7 +9,9 @@ const serverMarkdownTemplate = `# Servers
 {{serversPart}}`
 
 const servers = (spec: OpenAPIV3.ServerObject[] | undefined): string => {
-  if(!spec) { return '' }
+  if (!spec) {
+    return ''
+  }
 
   const replacer: ReplacerKeyValueType = {
     serversPart: spec.map((serverPart: OpenAPIV3.ServerObject) => server(serverPart)).join('\n\n'),

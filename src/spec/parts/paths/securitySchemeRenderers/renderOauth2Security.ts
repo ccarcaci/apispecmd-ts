@@ -2,12 +2,12 @@ import { OpenAPIV3 } from 'openapi-types'
 import { templateReplacer } from '../../../../util/markdownReplacer'
 
 type FlowSecurity = {
-  authorizationUrl?: string,
-  tokenUrl?: string,
-  refreshUrl?: string,
+  authorizationUrl?: string
+  tokenUrl?: string
+  refreshUrl?: string
   scopes: {
-    [scope: string]: string,
-  },
+    [scope: string]: string
+  }
 }
 
 const oauthSecuritySchemeTemplate = `## {{securityKey}} security (oauth2)
@@ -27,19 +27,25 @@ const flowUrlTemplate = '* {{urlType}}: [{{url}}]({{url}})'
 const scopeTemplate = '* {{scopeName}}: {{scopeDescription}}'
 
 const generateFlow = (flowName: string, flowSecurity: FlowSecurity): string => {
-  const authorizationPart = flowSecurity.authorizationUrl ? templateReplacer(flowUrlTemplate, {
-    urlType: 'authorization',
-    url: flowSecurity.authorizationUrl,
-  }) : ''
-  const tokenPart = flowSecurity.tokenUrl ? templateReplacer(flowUrlTemplate, {
-    urlType: 'token',
-    url: flowSecurity.tokenUrl,
-  }) : ''
-  const refreshPart = flowSecurity.refreshUrl ? templateReplacer(flowUrlTemplate, {
-    urlType: 'refresh',
-    url: flowSecurity.refreshUrl,
-  }) : ''
-  const urls = [ authorizationPart, tokenPart, refreshPart ].filter((part) => part).join('\n')
+  const authorizationPart = flowSecurity.authorizationUrl
+    ? templateReplacer(flowUrlTemplate, {
+        urlType: 'authorization',
+        url: flowSecurity.authorizationUrl,
+      })
+    : ''
+  const tokenPart = flowSecurity.tokenUrl
+    ? templateReplacer(flowUrlTemplate, {
+        urlType: 'token',
+        url: flowSecurity.tokenUrl,
+      })
+    : ''
+  const refreshPart = flowSecurity.refreshUrl
+    ? templateReplacer(flowUrlTemplate, {
+        urlType: 'refresh',
+        url: flowSecurity.refreshUrl,
+      })
+    : ''
+  const urls = [authorizationPart, tokenPart, refreshPart].filter((part) => part).join('\n')
   const scopes = Object.keys(flowSecurity.scopes)
     .map((scopeName) => {
       const replacements = {
@@ -60,19 +66,15 @@ const generateFlow = (flowName: string, flowSecurity: FlowSecurity): string => {
 }
 
 const renderOauth2Security = (securityKey: string, securityScheme: OpenAPIV3.OAuth2SecurityScheme): string => {
-  const implicitFlowPart = securityScheme.flows.implicit
-    ? generateFlow('Implicit', securityScheme.flows.implicit)
-    : ''
-  const passwordFlowPart = securityScheme.flows.password
-    ? generateFlow('Password', securityScheme.flows.password)
-    : ''
+  const implicitFlowPart = securityScheme.flows.implicit ? generateFlow('Implicit', securityScheme.flows.implicit) : ''
+  const passwordFlowPart = securityScheme.flows.password ? generateFlow('Password', securityScheme.flows.password) : ''
   const clientCredentialsPart = securityScheme.flows.clientCredentials
     ? generateFlow('Client Credentials', securityScheme.flows.clientCredentials)
     : ''
   const authorizationPart = securityScheme.flows.authorizationCode
     ? generateFlow('Authorization Code', securityScheme.flows.authorizationCode)
     : ''
-  const flows = [ implicitFlowPart, passwordFlowPart, clientCredentialsPart, authorizationPart ].join('\n\n')
+  const flows = [implicitFlowPart, passwordFlowPart, clientCredentialsPart, authorizationPart].join('\n\n')
   const replacements = {
     securityKey,
     flows,

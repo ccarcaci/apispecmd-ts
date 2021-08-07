@@ -9,31 +9,35 @@ import { paths } from './spec/parts/paths'
 import { logger } from './util/logger'
 import { convertToPdf } from './util/convertToPdf'
 
-const convertApiSpecToMd = async (inputSpec: string, outputMarkdown?: string, outputPdf?: string): Promise<string | void> => {
+const convertApiSpecToMd = async (
+  inputSpec: string,
+  outputMarkdown?: string,
+  outputPdf?: string
+): Promise<string | void> => {
   try {
     const api = await SwaggerParser.validate(inputSpec)
-  
-    if(api === undefined) {
+
+    if (api === undefined) {
       logger.error('ERROR | Spec is null')
       return Promise.reject()
     }
-  
+
     const writeStream = getWriteStream(outputMarkdown)
     const specV3 = api as OpenAPIV3.Document
     heading(writeStream, specV3)
     paths(writeStream, specV3)
 
-    if(outputMarkdown !== undefined) {
+    if (outputMarkdown !== undefined) {
       logger.info(`Markdown saved to ${outputMarkdown}`)
 
-      if(outputPdf !== undefined) {
+      if (outputPdf !== undefined) {
         await convertToPdf(outputMarkdown, outputPdf)
         logger.info(`PDF saved to ${outputPdf}`)
       }
     } else {
       return outputString
     }
-  } catch(error) {
+  } catch (error) {
     logger.error(`ERROR | ${JSON.stringify(error, null, 2)}`)
   }
 }
@@ -43,7 +47,7 @@ const convertApiSpecToMd = async (inputSpec: string, outputMarkdown?: string, ou
 let outputString: string
 
 const getWriteStream = (outputMarkdown?: string): Writable => {
-  if(outputMarkdown === undefined) {
+  if (outputMarkdown === undefined) {
     outputString = ''
     return StringStream
   }
@@ -57,7 +61,7 @@ const StringStream = new Stream.Writable({
     const decodedChunk = decoder.write(chunk)
     outputString = `${outputString}${decodedChunk}`
     callback()
-  }
+  },
 })
 
 // # ## ### ##### ########
