@@ -17,6 +17,7 @@
 - [Semver](#semver)
 - [Contributing](#contributing)
   - [Contribution Rules](#contribution-rules)
+    - [Prettier Rules](#prettier-rules)
   - [Contributors](#contributors)
 - [License](#license)
 
@@ -121,7 +122,20 @@ In order to contribute with this project there are some rules to follow.
 
 - Provided code must be covered with unit tests.
 - Correct conversion proof must be provided alongside the PR.
-- These [Eslint rules](...) must be fullfilled (download them and integrate with your editor).
+- [prettier](https://prettier.io/) is the code formatting choice for this project.
+
+#### Prettier Rules
+
+```json
+{
+  "jsxBracketSameLine": true,
+  "jsxSingleQuote": true,
+  "printWidth": 120,
+  "semi": false,
+  "singleQuote": true,
+  "tabWidth": 2
+}
+```
 
 ### Contributors
 
