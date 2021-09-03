@@ -23,7 +23,7 @@
 
 ## About the Project
 
-apispecmd-ts, as the namme suggests, is a library that converts [OpenAPI 3.0](https://www.openapis.org/) yaml format specs into human-readable Markdown. This is an opinionated library: the output format, architectural choices and conventions are enforced by the development team to reduce decision burden and code complexity. ([Prettier](https://prettier.io/) is a good example of opinionated library)
+apispecmd-ts, as the namme suggests, is a library that converts [OpenAPI 3.0](https://www.openapis.org/) specs into human-readable Markdown. This is an opinionated library: the output format, architectural choices and conventions are enforced by the development team to reduce decision burden and code complexity. ([Prettier](https://prettier.io/) is a good example of opinionated library)
 
 The project is still in initial development phase.
 
@@ -91,7 +91,7 @@ $ docker run --rm --name apispecmd-ts \
 
 Where:
 
-- `/path/to/openapi/spec/folder/` points to spec host folder where your apispec.yaml file resides.
+- `/path/to/openapi/spec/folder/` points to spec host folder where your apispec.yaml file resides. JSON format is supported too.
 - `/path/to/markdown/output/folder` points to the folder where you want to store your markdown result.
 - `INPUT_SPEC=input/apispec.yaml` "input" part is fixed and apispec.yaml is your spec file name.
 - `OUTPUT_MARKDOWN=output/output-markdown.md` "output" part is fixed and output-markdown.md is the desired name of your markdown output.

@@ -5,7 +5,7 @@
   "homepage": "https://github.com/ccarcaci/apispecmd-ts",
   "scripts": {
     "build": "tsc --project tsconfig.build.json",
-    "start": "npm run build; INPUT_SPEC=openapi/examples/petstore.yaml OUTPUT_MARKDOWN=openapi/output/petstore.md OUTPUT_PDF=openapi/output/petstore.pdf node build/index.js",
+    "start": "npm run build; INPUT_SPEC=openapi/examples/petstore.json OUTPUT_MARKDOWN=openapi/output/petstore.md OUTPUT_PDF=openapi/output/petstore.pdf node build/index.js",
     "test": "jest --passWithNoTests --runInBand"
   },
   "author": "ccarcaci <winston@codeab.it> (https://github.com/ccarcaci)",
