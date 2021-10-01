@@ -1,5 +1,8 @@
 node_modules
 build
-openapi/output
-openapi/examples/*.md
 bitacode-apispecmd-ts-*.tgz
+Todo.txt
+
+openapi/examples/output/*
+!openapi/examples/output/petstore.md
+!openapi/examples/output/petstore.pdf

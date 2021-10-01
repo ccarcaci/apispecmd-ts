@@ -1,4 +1,3 @@
 build
 node_modules
-openapi/output
-
+openapi/examples/output

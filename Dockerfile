@@ -1,5 +1,5 @@
 # docker build --tag ccarcaci/apispecmd-ts .
-# docker run --rm --env INPUT_SPEC=input/petstore.yaml --env OUTPUT_MARKDOWN=output/petstore.md --env OUTPUT_PDF=output/petstore.pdf --volume $PWD/openapi/examples:/app/input --volume $PWD/openapi/output:/app/output --name apispecmd-ts ccarcaci/apispecmd-ts:latest
+# docker run --rm --env INPUT_SPEC=input/petstore.yaml --env OUTPUT_MARKDOWN=output/petstore.md --env OUTPUT_PDF=output/petstore.pdf --volume $PWD/openapi/examples:/app/input --volume $PWD/openapi/examples/output:/app/output --name apispecmd-ts ccarcaci/apispecmd-ts:latest
 
 FROM node:fermium-alpine3.14
 
