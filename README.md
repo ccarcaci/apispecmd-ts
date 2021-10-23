@@ -23,7 +23,7 @@
 
 ## About the Project
 
-apispecmd-ts, as the namme suggests, is a library that converts [OpenAPI 3.0](https://www.openapis.org/) specs into human-readable Markdown. This is an opinionated library: the output format, architectural choices and conventions are enforced by the development team to reduce decision burden and code complexity. ([Prettier](https://prettier.io/) is a good example of opinionated library)
+apispecmd-ts, as the name suggests, is a library that converts [OpenAPI 3.0](https://www.openapis.org/) specs into human-readable Markdown. This is an opinionated library: the output format, architectural choices and conventions are enforced by the development team to reduce decision burden and code complexity. ([Prettier](https://prettier.io/) is a good example of opinionated library)
 
 The project is still in initial development phase.
 
