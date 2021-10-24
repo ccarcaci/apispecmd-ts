@@ -6,8 +6,7 @@ import { mediaType } from './mediaType/mediaType'
 const requestBodyTitleTemplate = `## Request Body ({{required}})
 {{description}}
 
-{{mediaTypePart}}
-`
+{{mediaTypePart}}`
 
 const operationRequestBody = (requestBody: OpenAPIV3.RequestBodyObject): string => {
   const mediaTypePart = generateAllMediaTypes(requestBody.content)

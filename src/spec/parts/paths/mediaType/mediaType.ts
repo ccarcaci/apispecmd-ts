@@ -2,7 +2,6 @@ import { OpenAPIV3 } from 'openapi-types'
 
 import { schema } from './schema/schema'
 import { templateReplacer } from '../../../../util/markdownReplacer'
-import { EmptySchemaError } from './errors/EmptySchemaError'
 
 const mediaTypeTemplate = `### {{mediaTypeTitle}} {{mediaTypeAggregation}} ({{mediaTypeName}})
 {{mediaTypeDescription}}
@@ -17,7 +16,7 @@ const mediaType = (mediaTypeName: string, mediaTypeObject: OpenAPIV3.MediaTypeOb
   let mediaTypeAggregation = ''
 
   if (!baseMediaType) {
-    throw new EmptySchemaError()
+    return ''
   }
 
   if (baseMediaType.allOf) {

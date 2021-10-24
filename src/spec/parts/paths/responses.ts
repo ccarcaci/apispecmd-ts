@@ -1,10 +1,11 @@
 import { OpenAPIV3 } from 'openapi-types'
-import { replacer } from 'src/util/replacer'
+import { replacer } from '../../../util/replacer'
 import { mediaType } from './mediaType/mediaType'
 
 const responsesTemplate = `## Responses
 
-{{responseContents}}`
+{{responseContents}}
+`
 
 const responses = (responses: OpenAPIV3.ResponsesObject): string => {
   const responsesCodes = Object.keys(responses)

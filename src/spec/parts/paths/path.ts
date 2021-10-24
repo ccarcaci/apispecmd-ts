@@ -3,6 +3,7 @@ import { operationRequestBody } from './operationRequestBody'
 import { parameters } from './operationsParameters/parameters'
 import { removeDuplicatedParameters } from './operationsParameters/removeDuplicatedParameters'
 import { renderSecurityScheme } from './renderSecurityScheme'
+import { responses } from './responses'
 import { tags } from './tags'
 import { title } from './title'
 import { OperationType } from './types/OperationType'
@@ -23,7 +24,11 @@ const path = (operation: OperationType): string => {
   if (operation.operationObject.requestBody) {
     pathDescription = `${pathDescription}${operationRequestBody(
       operation.operationObject.requestBody as OpenAPIV3.RequestBodyObject
-    )}`
+    )}\n`
+  }
+
+  if (operation.operationObject.responses) {
+    pathDescription = `${pathDescription}${responses(operation.operationObject.responses)}\n`
   }
 
   return pathDescription

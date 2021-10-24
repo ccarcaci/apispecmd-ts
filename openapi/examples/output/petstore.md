@@ -119,6 +119,14 @@ Pet object that needs to be added to the store
 |Name|Required|Type|Format|Default|Minimum|Exclusive Minimum|Maximum|Exclusive Maximum|Min Length|Max Length|Unique Items|Pattern|Nullable|Read Only|Write Only|Deprecated|
 |-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|
 |name|false|string|||||||||||||||
+## Responses
+
+### 400 (Invalid ID supplied)
+
+### 404 (Pet not found)
+
+### 405 (Validation exception)
+
 
 # [POST] /pet (addPet)
 
@@ -190,6 +198,10 @@ Pet object that needs to be added to the store
 |Name|Required|Type|Format|Default|Minimum|Exclusive Minimum|Maximum|Exclusive Maximum|Min Length|Max Length|Unique Items|Pattern|Nullable|Read Only|Write Only|Deprecated|
 |-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|
 |name|false|string|||||||||||||||
+## Responses
+
+### 405 (Invalid input)
+
 
 # [GET] /pet/{petId} (getPetById)
 
@@ -214,6 +226,65 @@ header param: api_key
 * petId: ID of pet to return
 
 
+## Responses
+
+### 200 (successful operation)
+
+### (application/json)
+
+#### Properties
+
+|Name|Required|Type|Format|Default|Minimum|Exclusive Minimum|Maximum|Exclusive Maximum|Min Length|Max Length|Unique Items|Pattern|Nullable|Read Only|Write Only|Deprecated|
+|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|
+|id|false||||||||||||||||
+|category|false||||||||||||||||
+|name|true|string|||||||||||||||
+|photoUrls|true|array of strings||||||||20|||||||
+|friend|false||||||||||||||||
+|tags|false|array of objects (See related table)|||||||1||||||||
+|status|false|string|||||||||||||||
+|petType|false|string|||||||||||||||
+
+**Enums**
+
+* status: ["available","pending","sold"]
+
+#### Properties -> tags array
+
+|Name|Required|Type|Format|Default|Minimum|Exclusive Minimum|Maximum|Exclusive Maximum|Min Length|Max Length|Unique Items|Pattern|Nullable|Read Only|Write Only|Deprecated|
+|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|
+|id|false||||||||||||||||
+|name|false|string|||||||1||||||||
+
+### (application/xml)
+
+#### Properties
+
+|Name|Required|Type|Format|Default|Minimum|Exclusive Minimum|Maximum|Exclusive Maximum|Min Length|Max Length|Unique Items|Pattern|Nullable|Read Only|Write Only|Deprecated|
+|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|
+|id|false||||||||||||||||
+|category|false||||||||||||||||
+|name|true|string|||||||||||||||
+|photoUrls|true|array of strings||||||||20|||||||
+|friend|false||||||||||||||||
+|tags|false|array of objects (See related table)|||||||1||||||||
+|status|false|string|||||||||||||||
+|petType|false|string|||||||||||||||
+
+**Enums**
+
+* status: ["available","pending","sold"]
+
+#### Properties -> tags array
+
+|Name|Required|Type|Format|Default|Minimum|Exclusive Minimum|Maximum|Exclusive Maximum|Min Length|Max Length|Unique Items|Pattern|Nullable|Read Only|Write Only|Deprecated|
+|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|
+|id|false||||||||||||||||
+|name|false|string|||||||1||||||||
+
+### 400 (Invalid ID supplied)
+
+### 404 (Pet not found)
 
 
 # [POST] /pet/{petId} (updatePetWithForm)
@@ -254,6 +325,10 @@ Scopes:
 |-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|
 |name|false|string|||||||||||||||
 |status|false|string|||||||||||||||
+## Responses
+
+### 405 (Invalid input)
+
 
 # [DELETE] /pet/{petId} (deletePet)
 
@@ -285,6 +360,9 @@ Scopes:
 * petId: Pet id to delete
 
 
+## Responses
+
+### 400 (Invalid pet value)
 
 
 # [POST] /pet/{petId}/uploadImage (uploadFile)
@@ -324,6 +402,20 @@ Scopes:
 |Name|Required|Type|Format|Default|Minimum|Exclusive Minimum|Maximum|Exclusive Maximum|Min Length|Max Length|Unique Items|Pattern|Nullable|Read Only|Write Only|Deprecated|
 |-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|
 |content|false|string|binary||||||||||||||
+## Responses
+
+### 200 (successful operation)
+
+### (application/json)
+
+#### Properties
+
+|Name|Required|Type|Format|Default|Minimum|Exclusive Minimum|Maximum|Exclusive Maximum|Min Length|Max Length|Unique Items|Pattern|Nullable|Read Only|Write Only|Deprecated|
+|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|
+|code|false|integer|int32||||||||||||||
+|type|false|string|||||||||||||||
+|message|false|string|||||||||||||||
+
 
 # [GET] /pet/findByStatus (findPetsByStatus)
 
@@ -353,6 +445,75 @@ Scopes:
 * status: Status values that need to be considered for filter
 
 
+## Responses
+
+### 200 (successful operation)
+
+### (application/json)
+
+#### Content
+
+|Name|Required|Type|Format|Default|Minimum|Exclusive Minimum|Maximum|Exclusive Maximum|Min Length|Max Length|Unique Items|Pattern|Nullable|Read Only|Write Only|Deprecated|
+|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|
+|content|false|array of objects (See related table)|||||||||||||||
+
+#### Content -> content array
+
+|Name|Required|Type|Format|Default|Minimum|Exclusive Minimum|Maximum|Exclusive Maximum|Min Length|Max Length|Unique Items|Pattern|Nullable|Read Only|Write Only|Deprecated|
+|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|
+|id|false||||||||||||||||
+|category|false||||||||||||||||
+|name|true|string|||||||||||||||
+|photoUrls|true|array of strings||||||||20|||||||
+|friend|false||||||||||||||||
+|tags|false|array of objects (See related table)|||||||1||||||||
+|status|false|string|||||||||||||||
+|petType|false|string|||||||||||||||
+
+**Enums**
+
+* status: ["available","pending","sold"]
+
+#### Content -> content array -> tags array
+
+|Name|Required|Type|Format|Default|Minimum|Exclusive Minimum|Maximum|Exclusive Maximum|Min Length|Max Length|Unique Items|Pattern|Nullable|Read Only|Write Only|Deprecated|
+|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|
+|id|false||||||||||||||||
+|name|false|string|||||||1||||||||
+
+### (application/xml)
+
+#### Content
+
+|Name|Required|Type|Format|Default|Minimum|Exclusive Minimum|Maximum|Exclusive Maximum|Min Length|Max Length|Unique Items|Pattern|Nullable|Read Only|Write Only|Deprecated|
+|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|
+|content|false|array of objects (See related table)|||||||||||||||
+
+#### Content -> content array
+
+|Name|Required|Type|Format|Default|Minimum|Exclusive Minimum|Maximum|Exclusive Maximum|Min Length|Max Length|Unique Items|Pattern|Nullable|Read Only|Write Only|Deprecated|
+|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|
+|id|false||||||||||||||||
+|category|false||||||||||||||||
+|name|true|string|||||||||||||||
+|photoUrls|true|array of strings||||||||20|||||||
+|friend|false||||||||||||||||
+|tags|false|array of objects (See related table)|||||||1||||||||
+|status|false|string|||||||||||||||
+|petType|false|string|||||||||||||||
+
+**Enums**
+
+* status: ["available","pending","sold"]
+
+#### Content -> content array -> tags array
+
+|Name|Required|Type|Format|Default|Minimum|Exclusive Minimum|Maximum|Exclusive Maximum|Min Length|Max Length|Unique Items|Pattern|Nullable|Read Only|Write Only|Deprecated|
+|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|
+|id|false||||||||||||||||
+|name|false|string|||||||1||||||||
+
+### 400 (Invalid status value)
 
 
 # [GET] /pet/findByTags (findPetsByTags)
@@ -383,6 +544,75 @@ Scopes:
 * tags: Tags to filter by
 
 
+## Responses
+
+### 200 (successful operation)
+
+### (application/json)
+
+#### Content
+
+|Name|Required|Type|Format|Default|Minimum|Exclusive Minimum|Maximum|Exclusive Maximum|Min Length|Max Length|Unique Items|Pattern|Nullable|Read Only|Write Only|Deprecated|
+|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|
+|content|false|array of objects (See related table)|||||||||||||||
+
+#### Content -> content array
+
+|Name|Required|Type|Format|Default|Minimum|Exclusive Minimum|Maximum|Exclusive Maximum|Min Length|Max Length|Unique Items|Pattern|Nullable|Read Only|Write Only|Deprecated|
+|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|
+|id|false||||||||||||||||
+|category|false||||||||||||||||
+|name|true|string|||||||||||||||
+|photoUrls|true|array of strings||||||||20|||||||
+|friend|false||||||||||||||||
+|tags|false|array of objects (See related table)|||||||1||||||||
+|status|false|string|||||||||||||||
+|petType|false|string|||||||||||||||
+
+**Enums**
+
+* status: ["available","pending","sold"]
+
+#### Content -> content array -> tags array
+
+|Name|Required|Type|Format|Default|Minimum|Exclusive Minimum|Maximum|Exclusive Maximum|Min Length|Max Length|Unique Items|Pattern|Nullable|Read Only|Write Only|Deprecated|
+|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|
+|id|false||||||||||||||||
+|name|false|string|||||||1||||||||
+
+### (application/xml)
+
+#### Content
+
+|Name|Required|Type|Format|Default|Minimum|Exclusive Minimum|Maximum|Exclusive Maximum|Min Length|Max Length|Unique Items|Pattern|Nullable|Read Only|Write Only|Deprecated|
+|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|
+|content|false|array of objects (See related table)|||||||||||||||
+
+#### Content -> content array
+
+|Name|Required|Type|Format|Default|Minimum|Exclusive Minimum|Maximum|Exclusive Maximum|Min Length|Max Length|Unique Items|Pattern|Nullable|Read Only|Write Only|Deprecated|
+|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|
+|id|false||||||||||||||||
+|category|false||||||||||||||||
+|name|true|string|||||||||||||||
+|photoUrls|true|array of strings||||||||20|||||||
+|friend|false||||||||||||||||
+|tags|false|array of objects (See related table)|||||||1||||||||
+|status|false|string|||||||||||||||
+|petType|false|string|||||||||||||||
+
+**Enums**
+
+* status: ["available","pending","sold"]
+
+#### Content -> content array -> tags array
+
+|Name|Required|Type|Format|Default|Minimum|Exclusive Minimum|Maximum|Exclusive Maximum|Min Length|Max Length|Unique Items|Pattern|Nullable|Read Only|Write Only|Deprecated|
+|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|
+|id|false||||||||||||||||
+|name|false|string|||||||1||||||||
+
+### 400 (Invalid tag value)
 
 
 # [GET] /store/inventory (getInventory)
@@ -399,6 +629,17 @@ header param: api_key
 
 
 
+## Responses
+
+### 200 (successful operation)
+
+### (application/json)
+
+#### Content
+
+|Name|Required|Type|Format|Default|Minimum|Exclusive Minimum|Maximum|Exclusive Maximum|Min Length|Max Length|Unique Items|Pattern|Nullable|Read Only|Write Only|Deprecated|
+|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|
+|content|false|object (See related table)|||||||||||||||
 
 
 # [POST] /store/order (placeOrder)
@@ -431,6 +672,48 @@ order placed for purchasing the pet
 **Enums**
 
 * status: ["placed","approved","delivered"]
+## Responses
+
+### 200 (successful operation)
+
+### (application/json)
+
+#### Properties
+
+|Name|Required|Type|Format|Default|Minimum|Exclusive Minimum|Maximum|Exclusive Maximum|Min Length|Max Length|Unique Items|Pattern|Nullable|Read Only|Write Only|Deprecated|
+|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|
+|id|false||||||||||||||||
+|petId|false||||||||||||||||
+|quantity|false|integer|int32|1|1||||||||||||
+|shipDate|false|string|date-time||||||||||||||
+|status|false|string|||||||||||||||
+|complete|false|boolean||false||||||||||true|||
+|requestId|false|string|||||||||||||true||
+
+**Enums**
+
+* status: ["placed","approved","delivered"]
+
+### (application/xml)
+
+#### Properties
+
+|Name|Required|Type|Format|Default|Minimum|Exclusive Minimum|Maximum|Exclusive Maximum|Min Length|Max Length|Unique Items|Pattern|Nullable|Read Only|Write Only|Deprecated|
+|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|
+|id|false||||||||||||||||
+|petId|false||||||||||||||||
+|quantity|false|integer|int32|1|1||||||||||||
+|shipDate|false|string|date-time||||||||||||||
+|status|false|string|||||||||||||||
+|complete|false|boolean||false||||||||||true|||
+|requestId|false|string|||||||||||||true||
+
+**Enums**
+
+* status: ["placed","approved","delivered"]
+
+### 400 (Invalid Order)
+
 
 # [GET] /store/order/{orderId} (getOrderById)
 
@@ -451,6 +734,49 @@ order placed for purchasing the pet
 * orderId: ID of pet that needs to be fetched
 
 
+## Responses
+
+### 200 (successful operation)
+
+### (application/json)
+
+#### Properties
+
+|Name|Required|Type|Format|Default|Minimum|Exclusive Minimum|Maximum|Exclusive Maximum|Min Length|Max Length|Unique Items|Pattern|Nullable|Read Only|Write Only|Deprecated|
+|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|
+|id|false||||||||||||||||
+|petId|false||||||||||||||||
+|quantity|false|integer|int32|1|1||||||||||||
+|shipDate|false|string|date-time||||||||||||||
+|status|false|string|||||||||||||||
+|complete|false|boolean||false||||||||||true|||
+|requestId|false|string|||||||||||||true||
+
+**Enums**
+
+* status: ["placed","approved","delivered"]
+
+### (application/xml)
+
+#### Properties
+
+|Name|Required|Type|Format|Default|Minimum|Exclusive Minimum|Maximum|Exclusive Maximum|Min Length|Max Length|Unique Items|Pattern|Nullable|Read Only|Write Only|Deprecated|
+|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|
+|id|false||||||||||||||||
+|petId|false||||||||||||||||
+|quantity|false|integer|int32|1|1||||||||||||
+|shipDate|false|string|date-time||||||||||||||
+|status|false|string|||||||||||||||
+|complete|false|boolean||false||||||||||true|||
+|requestId|false|string|||||||||||||true||
+
+**Enums**
+
+* status: ["placed","approved","delivered"]
+
+### 400 (Invalid ID supplied)
+
+### 404 (Order not found)
 
 
 # [DELETE] /store/order/{orderId} (deleteOrder)
@@ -472,6 +798,11 @@ order placed for purchasing the pet
 * orderId: ID of the order that needs to be deleted
 
 
+## Responses
+
+### 400 (Invalid ID supplied)
+
+### 404 (Order not found)
 
 
 # [POST] /user (createUser)
@@ -502,6 +833,10 @@ Created user object
 |password|false|string|password||||||8|||/(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])/|||||
 |phone|false|string||||||||||/^\+(?:[0-9]-?){6,14}[0-9]$/|||||
 |userStatus|false|integer|int32||||||||||||||
+## Responses
+
+### default (successful operation)
+
 
 # [GET] /user/{username} (getUserByName)
 
@@ -522,6 +857,45 @@ Created user object
 * username: The name that needs to be fetched. Use user1 for testing. 
 
 
+## Responses
+
+### 200 (successful operation)
+
+### (application/json)
+
+#### Properties
+
+|Name|Required|Type|Format|Default|Minimum|Exclusive Minimum|Maximum|Exclusive Maximum|Min Length|Max Length|Unique Items|Pattern|Nullable|Read Only|Write Only|Deprecated|
+|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|
+|id|false|integer|int64|||||||||||true|||
+|pet|false||||||||||||||||
+|username|false|string|||||||4||||||||
+|firstName|false|string|||||||1||||||||
+|lastName|false|string|||||||1||||||||
+|email|false|string|email||||||||||||||
+|password|false|string|password||||||8|||/(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])/|||||
+|phone|false|string||||||||||/^\+(?:[0-9]-?){6,14}[0-9]$/|||||
+|userStatus|false|integer|int32||||||||||||||
+
+### (application/xml)
+
+#### Properties
+
+|Name|Required|Type|Format|Default|Minimum|Exclusive Minimum|Maximum|Exclusive Maximum|Min Length|Max Length|Unique Items|Pattern|Nullable|Read Only|Write Only|Deprecated|
+|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|
+|id|false|integer|int64|||||||||||true|||
+|pet|false||||||||||||||||
+|username|false|string|||||||4||||||||
+|firstName|false|string|||||||1||||||||
+|lastName|false|string|||||||1||||||||
+|email|false|string|email||||||||||||||
+|password|false|string|password||||||8|||/(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])/|||||
+|phone|false|string||||||||||/^\+(?:[0-9]-?){6,14}[0-9]$/|||||
+|userStatus|false|integer|int32||||||||||||||
+
+### 400 (Invalid username supplied)
+
+### 404 (User not found)
 
 
 # [PUT] /user/{username} (updateUser)
@@ -561,6 +935,12 @@ Updated user object
 |password|false|string|password||||||8|||/(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])/|||||
 |phone|false|string||||||||||/^\+(?:[0-9]-?){6,14}[0-9]$/|||||
 |userStatus|false|integer|int32||||||||||||||
+## Responses
+
+### 400 (Invalid user supplied)
+
+### 404 (User not found)
+
 
 # [DELETE] /user/{username} (deleteUser)
 
@@ -581,6 +961,11 @@ Updated user object
 * username: The name that needs to be deleted
 
 
+## Responses
+
+### 400 (Invalid username supplied)
+
+### 404 (User not found)
 
 
 # [POST] /user/createWithArray (createUsersWithArrayInput)
@@ -617,6 +1002,10 @@ List of user object
 |password|false|string|password||||||8|||/(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])/|||||
 |phone|false|string||||||||||/^\+(?:[0-9]-?){6,14}[0-9]$/|||||
 |userStatus|false|integer|int32||||||||||||||
+## Responses
+
+### default (successful operation)
+
 
 # [POST] /user/createWithList (createUsersWithListInput)
 
@@ -652,6 +1041,10 @@ List of user object
 |password|false|string|password||||||8|||/(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])/|||||
 |phone|false|string||||||||||/^\+(?:[0-9]-?){6,14}[0-9]$/|||||
 |userStatus|false|integer|int32||||||||||||||
+## Responses
+
+### default (successful operation)
+
 
 # [GET] /user/login (loginUser)
 
@@ -674,6 +1067,27 @@ List of user object
 * password: The password for login in clear text
 
 
+## Responses
+
+### 200 (successful operation)
+
+### (application/json)
+
+#### Content
+
+|Name|Required|Type|Format|Default|Minimum|Exclusive Minimum|Maximum|Exclusive Maximum|Min Length|Max Length|Unique Items|Pattern|Nullable|Read Only|Write Only|Deprecated|
+|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|
+|content|false|string|||||||||||||||
+
+### (application/xml)
+
+#### Content
+
+|Name|Required|Type|Format|Default|Minimum|Exclusive Minimum|Maximum|Exclusive Maximum|Min Length|Max Length|Unique Items|Pattern|Nullable|Read Only|Write Only|Deprecated|
+|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|
+|content|false|string|||||||||||||||
+
+### 400 (Invalid username/password supplied)
 
 
 # [GET] /user/logout (logoutUser)
@@ -686,5 +1100,8 @@ List of user object
 
 
 
+## Responses
+
+### default (successful operation)
 
 
