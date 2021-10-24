@@ -81,11 +81,11 @@ You can build the image by yourself using the [Dockerfile](Dockerfile) in this r
 
 ```bash
 $ docker run --rm --name apispecmd-ts \
-  --volume /path/to/openapi/spec/folder/:/app/input
-  --volume /path/to/markdown/output/folder/:/app/output
+  --volume /path/to/openapi/spec/folder/:/app/input \
+  --volume /path/to/markdown/output/folder/:/app/output \
   --env INPUT_SPEC=input/apispec.yaml \
   --env OUTPUT_MARKDOWN=output/output-markdown.md \
-  --env OUTPUT_PDF=output/output-pdf.pdf \ # OPTIONAL
+  --env OUTPUT_PDF=output/output-pdf.pdf \
   ccarcaci/apispecmd-ts
 ```
 
