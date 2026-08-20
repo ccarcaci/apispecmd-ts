@@ -26,7 +26,7 @@
   },
   "dependencies": {
     "@apidevtools/swagger-parser": "^10.0.2",
-    "md-to-pdf": "^4.0.0",
+    "md-to-pdf": "^5.2.5",
     "openapi-types": "^9.1.0",
     "winston": "^3.3.3"
   },
