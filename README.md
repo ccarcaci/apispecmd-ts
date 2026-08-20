@@ -1,5 +1,9 @@
 # apispecmd-ts
 
+> [!WARNING]
+> **Deprecated as of 2026-08-20.** No longer maintained.
+> No further releases, including security fixes.
+
 [![<CircleCI>](https://circleci.com/gh/ccarcaci/apispecmd-ts.svg?style=shield)](https://circleci.com/gh/ccarcaci/apispecmd-ts)
 [![npm](https://img.shields.io/npm/v/@bitacode/apispecmd-ts?color=green)](https://www.npmjs.com/package/@bitacode/apispecmd-ts)
 [![License](https://img.shields.io/npm/l/@bitacode/apispecmd-ts)](https://mit-license.org/)
